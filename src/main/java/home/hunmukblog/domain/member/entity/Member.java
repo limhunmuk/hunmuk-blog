@@ -1,11 +1,7 @@
 package home.hunmukblog.domain.member.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -14,8 +10,11 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table(name = "member")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mem_id", nullable = false)
     private Long id;
 
@@ -36,5 +35,14 @@ public class Member {
 
     @Column(name = "mod_id", length = 45)
     private String modId;
+
+    @Builder
+    public Member(Long id, String name, Integer age, LocalDateTime regDt, String regId) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.regDt = regDt;
+        this.regId = regId;
+    }
 
 }
