@@ -5,11 +5,13 @@ import home.hunmukblog.domain.member.dto.MemberSearch;
 import home.hunmukblog.domain.member.entity.Member;
 import home.hunmukblog.web.api.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 public class MemberController {
@@ -31,6 +33,8 @@ public class MemberController {
 
     @PostMapping("/member")
     public Member memberCreate(@RequestBody MemberCreate request) {
+
+        log.debug("member 등록 > request : {}", request);
         return memberService.saveMember(request);
     }
 }

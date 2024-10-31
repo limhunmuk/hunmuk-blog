@@ -2,8 +2,10 @@
 
 import { ref } from 'vue';
 import {write} from "node:fs";
+import {useRouter} from "vue-router";
 
 import axios from "axios";
+const useRoute = useRouter();
 
 //const axios = require("axios");
 
@@ -12,12 +14,12 @@ const content = ref("");
 
 
 
-const write = () => {
+const write1 = () => {
 
   console.log(title.value);
   console.log(content.value);
 
-  axios.post("http://localhost:8082/api/member", {
+  axios.post("http://localhost:8080/api/member", {
     name: title.value,
     age: content.value,
   }).then((res) => {
@@ -28,6 +30,8 @@ const write = () => {
     console.log("에러발생=====================");
     console.log(err);
   });
+
+
 
 /*  fetch("http://localhost:8082/api/post/write", {
     method: "POST",
@@ -42,6 +46,23 @@ const write = () => {
     console.log(res);
   });*/
 };
+
+const write = () => {
+  console.log(title.value);
+  console.log(content.value);
+
+  //alert(title.value + ' ' + content.value);
+  axios.post('/api/post', {
+    title: title.value,
+    content: content.value
+  }).then((response) => {
+    console.log(response);
+    useRoute.replace('/');
+  }).catch((error) => {
+    console.log(error);
+  });
+}
+
 
 </script>
 
