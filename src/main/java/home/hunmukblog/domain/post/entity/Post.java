@@ -15,7 +15,7 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "title")
     private String title;
@@ -40,7 +40,7 @@ public class Post {
     private String modId;
 
     @Builder
-    public Post(Integer id, String title, String content, Integer viewCnt, LocalDateTime regDt, String regId, LocalDateTime modDt, String modId) {
+    public Post(Long id, String title, String content, Integer viewCnt, LocalDateTime regDt, String regId, LocalDateTime modDt, String modId) {
         this.id = id;
         this.title = title;
         this.content = content;

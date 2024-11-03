@@ -12,41 +12,6 @@ const useRoute = useRouter();
 const title = ref("");
 const content = ref("");
 
-
-
-const write1 = () => {
-
-  console.log(title.value);
-  console.log(content.value);
-
-  axios.post("http://localhost:8080/api/member", {
-    name: title.value,
-    age: content.value,
-  }).then((res) => {
-    console.log("성공=====================");
-    console.log(res);
-
-  }).catch((err) => {
-    console.log("에러발생=====================");
-    console.log(err);
-  });
-
-
-
-/*  fetch("http://localhost:8082/api/post/write", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      title: title.value,
-      content: content.value,
-    }),
-  }).then((res) => {
-    console.log(res);
-  });*/
-};
-
 const write = () => {
   console.log(title.value);
   console.log(content.value);
@@ -62,18 +27,8 @@ const write = () => {
     console.log(error);
   });
 }
-
-
 </script>
-
 <template>
-<!--<h1>작성화면</h1>
-  <div>
-    <input type="text" v-model="cnt" />
-    <button @click="cnt++">증가</button>
-    <button @click="cnt&#45;&#45;">감소</button>
-  </div>-->
-
   <div>
     <h1>글 등록</h1>
     <div>

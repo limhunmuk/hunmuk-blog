@@ -2,21 +2,32 @@ package home.hunmukblog.domain.member.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.Collections;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "member")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
+public class Member implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mem_id", nullable = false)
     private Long id;
+
+    @Column(name = "login_id", length = 45)
+    private String loginId;
+
+    @Column(name = "pwd", length = 100)
+    private String pwd;
 
     @Column(name = "name", length = 45)
     private String name;
@@ -43,6 +54,41 @@ public class Member {
         this.age = age;
         this.regDt = regDt;
         this.regId = regId;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return AuthorityUtils.createAuthorityList("ROLE_USER");
+    }
+
+    @Override
+    public String getPassword() {
+        return  this.pwd;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.loginId;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
 }

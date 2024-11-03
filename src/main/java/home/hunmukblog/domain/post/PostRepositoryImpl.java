@@ -33,6 +33,14 @@ public class PostRepositoryImpl implements PostRepositoryCustom {
                 .fetch();
     }
 
+    @Override
+    public Post searchPostDetail(Long id) {
+        return queryFactory
+                .selectFrom(post)
+                .where(post.id.eq(id))
+                .fetchOne();
+    }
+
     private BooleanExpression containTitle(String title) {
         return hasText(title) ? post.title.contains(title) : null;
     }
