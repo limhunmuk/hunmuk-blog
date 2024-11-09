@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class MemberSearch {
 
-    private String name;
-    private Integer age;
+    private String loginId;
+    private Integer name;
 }

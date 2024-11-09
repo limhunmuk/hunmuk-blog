@@ -21,7 +21,7 @@ public class PostController {
      * @param search
      * @return
      */
-    @GetMapping("/post")
+    @GetMapping("/api/post")
     public List<Post> posts(PostSearch search) {
 
         List<Post> posts = postService.searchPostList(search);
@@ -33,7 +33,7 @@ public class PostController {
      * @param id
      * @return
      */
-    @GetMapping("/post/{id}")
+    @GetMapping("/api/post/{id}")
     public Post postDetail(@PathVariable Long id) {
 
         System.out.println("post detail id = " + id);
@@ -45,7 +45,7 @@ public class PostController {
      * @param request
      * @return
      */
-    @PostMapping("/post")
+    @PostMapping("/api/post")
     public Post PostCreate(@RequestBody PostCreate request) {
 
         System.out.println(" ============================================== " );
@@ -60,7 +60,7 @@ public class PostController {
      * @param request
      * @return
      */
-    @PutMapping("/post/{id}")
+    @PutMapping("/api/post/{id}")
     public Post PostUpdate(@PathVariable Long id, @RequestBody PostUpdate request) {
 
         System.out.println(" ============================================== " );
@@ -74,7 +74,7 @@ public class PostController {
      * @param id
      * @return
      */
-    @DeleteMapping("/post/{id}")
+    @DeleteMapping("/api/post/{id}")
     public void PostDelete(@PathVariable Long id) {
 
         System.out.println(" ============================================== " );
