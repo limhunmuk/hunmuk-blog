@@ -2,6 +2,8 @@ package home.hunmukblog.web.config.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import home.hunmukblog.domain.member.MemberRepository;
+import home.hunmukblog.web.config.handler.LoginFailHandler;
+import home.hunmukblog.web.config.handler.LoginSuccessHandler;
 import home.hunmukblog.web.filter.LoginIdPasswordAuthFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -45,7 +47,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests(
-                    authz -> authz.anyRequest().permitAll()
+
+                    auth ->
+                            //auth.requestMatchers("/api/login").permitAll()
+                            //.requestMatchers("/api/signup").authenticated()
+                           auth.anyRequest().permitAll()
                 )
                 .addFilterBefore(usernamePasswordAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .rememberMe(rm -> rm.rememberMeParameter("remember-me")
@@ -60,9 +66,10 @@ public class SecurityConfig {
     public LoginIdPasswordAuthFilter usernamePasswordAuthenticationFilter() {
         LoginIdPasswordAuthFilter filter = new LoginIdPasswordAuthFilter("/api/login", objectMapper);
         filter.setAuthenticationManager(authenticationManager());
-        filter.setAuthenticationSuccessHandler(new SimpleUrlAuthenticationSuccessHandler("/"));
-//        filter.setAuthenticationFailureHandler(new LoginFailHandler(objectMapper));
-        filter.setAuthenticationFailureHandler(new SimpleUrlAuthenticationFailureHandler("/login?error"));
+        //filter.setAuthenticationSuccessHandler(new SimpleUrlAuthenticationSuccessHandler("/"));
+        filter.setAuthenticationSuccessHandler(new LoginSuccessHandler());
+        filter.setAuthenticationFailureHandler(new LoginFailHandler(objectMapper));
+//        filter.setAuthenticationFailureHandler(new SimpleUrlAuthenticationFailureHandler("/login?error"));
         filter.setSecurityContextRepository(new HttpSessionSecurityContextRepository());
 
         SpringSessionRememberMeServices rememberMeServices = new SpringSessionRememberMeServices();
