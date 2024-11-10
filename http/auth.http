@@ -12,6 +12,7 @@ Content-Type: application/json
 
 
 ### 로그인
+# @no-redirect
 POST http://localhost:8080/api/login
 Content-Type: application/json
 
@@ -24,12 +25,16 @@ Content-Type: application/json
 
 GET http://localhost:8080/user
 
+"Authorization: Bearer {eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczMTIyNjk5NCwiZXhwIjoxNzMxMjI3MDgwfQ.RLzNnAe0OwvU-1hSpriUrPCXtJ7XLKH-XkmUX8Q46uHnTO1F2XLorhO4mrT9X7Cryj5CaQQPhtjbMlfp9Sm8Ug}"
+
 
 ### 관리자 페이지
 
 GET http://localhost:8080/admin
 
+"Authorization : Bearer {eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczMTIyNjk5NCwiZXhwIjoxNzMxMjI3MDgwfQ.RLzNnAe0OwvU-1hSpriUrPCXtJ7XLKH-XkmUX8Q46uHnTO1F2XLorhO4mrT9X7Cryj5CaQQPhtjbMlfp9Sm8Ug}"
+
 
 ### 메인 페이지
 
-GET http://localhost:8080
+GET http://localhost:8080/api/post

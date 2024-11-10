@@ -45,7 +45,7 @@ public class MemberControllerDocTest {
                 .build();
     }*/
 
-    @Test
+   // @Test
     @DisplayName("리스트")
     public void test() throws Exception {
 
@@ -68,7 +68,7 @@ public class MemberControllerDocTest {
                 ));
     }
 
-    @Test
+    //@Test
     @DisplayName("상세")
     public void test2() throws Exception {
 

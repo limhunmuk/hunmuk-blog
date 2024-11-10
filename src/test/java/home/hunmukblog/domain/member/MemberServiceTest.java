@@ -32,7 +32,7 @@ class MemberServiceTest {
 
         MemberCreate memberCreate = MemberCreate.builder()
                 .name("아무개")
-                .age(20)
+                .age("20")
                 .build();
 
         Member member = memberService.saveMember(memberCreate);
