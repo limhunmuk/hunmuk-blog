@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @SpringBootTest
 public class PasswordEncoderTest {
 
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Test
@@ -15,6 +16,8 @@ public class PasswordEncoderTest {
 
         String password = "1234";
         String encPwd = passwordEncoder.encode(password);
+
+        System.out.println(encPwd);
 
         System.out.println(passwordEncoder.matches(password, encPwd));
 

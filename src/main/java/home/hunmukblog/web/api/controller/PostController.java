@@ -6,6 +6,7 @@ import home.hunmukblog.domain.post.dto.PostUpdate;
 import home.hunmukblog.domain.post.entity.Post;
 import home.hunmukblog.web.api.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class PostController {
      * @param search
      * @return
      */
-    @GetMapping("/post")
+    @GetMapping("/api/post")
     public List<Post> posts(PostSearch search) {
 
         List<Post> posts = postService.searchPostList(search);
@@ -33,10 +34,9 @@ public class PostController {
      * @param id
      * @return
      */
-    @GetMapping("/post/{id}")
+    @GetMapping("/api/post/{id}")
     public Post postDetail(@PathVariable Long id) {
 
-        System.out.println("post detail id = " + id);
         return postService.searchPostDetail(id);
     }
 
@@ -45,7 +45,9 @@ public class PostController {
      * @param request
      * @return
      */
-    @PostMapping("/post")
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/api/post")
     public Post PostCreate(@RequestBody PostCreate request) {
 
         System.out.println(" ============================================== " );
@@ -60,7 +62,8 @@ public class PostController {
      * @param request
      * @return
      */
-    @PutMapping("/post/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PutMapping("/api/post/{id}")
     public Post PostUpdate(@PathVariable Long id, @RequestBody PostUpdate request) {
 
         System.out.println(" ============================================== " );
@@ -74,7 +77,8 @@ public class PostController {
      * @param id
      * @return
      */
-    @DeleteMapping("/post/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @DeleteMapping("/api/post/{id}")
     public void PostDelete(@PathVariable Long id) {
 
         System.out.println(" ============================================== " );

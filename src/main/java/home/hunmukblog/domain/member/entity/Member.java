@@ -2,6 +2,7 @@ package home.hunmukblog.domain.member.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,8 +16,11 @@ import java.util.Collections;
 @Setter
 @Entity
 @Table(name = "member")
+@SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member implements UserDetails{
+
+    private static final long serialVersionUID = 2335044470054104423L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,18 +51,9 @@ public class Member implements UserDetails{
     @Column(name = "mod_id", length = 45)
     private String modId;
 
-    @Builder
-    public Member(Long id, String name, Integer age, LocalDateTime regDt, String regId) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.regDt = regDt;
-        this.regId = regId;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return AuthorityUtils.createAuthorityList("ROLE_USER");
+        return AuthorityUtils.createAuthorityList("ROLE_ADMIN");
     }
 
     @Override
@@ -71,24 +66,5 @@ public class Member implements UserDetails{
         return this.loginId;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 
 }

@@ -26,9 +26,16 @@ public class MemberService {
 
     public Member saveMember(MemberCreate request) {
 
+        memberRepository.findByLoginId(request.getLoginId())
+                .ifPresent(member -> {
+                    throw new IllegalArgumentException("이미 사용중인 아이디입니다.");
+                });
+
         Member member = Member.builder()
+                .loginId(request.getLoginId())
+                .pwd(request.getPassword())
                 .name(request.getName())
-                .age(request.getAge())
+                .age(Integer.valueOf(request.getAge()))
                 .regId("auto")
                 .regDt(LocalDateTime.now())
                 .build();

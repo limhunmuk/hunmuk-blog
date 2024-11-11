@@ -1,11 +1,35 @@
-### 로그인
-POST http://localhost:8080/auth/login
+### 회원가입
+
+POST http://localhost:8080/api/signup
 Content-Type: application/json
 
 {
-  "username": "test1",
-  "password": "1234",
-  "rememberMe": true
+  "name": "임훈묵",
+  "age": "33",
+  "loginId": "limhunmuk@gmail.com",
+  "password": "1234"
 }
 
-###
+
+### 로그인
+POST http://localhost:8080/api/login
+Content-Type: application/json
+
+{
+  "loginId": "admin",
+  "password": "1234"
+}
+
+### 사용자 페이지
+
+GET http://localhost:8080/user
+
+
+### 관리자 페이지
+
+GET http://localhost:8080/admin
+
+
+### 메인 페이지
+
+GET http://localhost:8080
