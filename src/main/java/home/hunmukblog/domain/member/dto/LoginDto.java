@@ -8,12 +8,4 @@ public class LoginDto {
     private String loginId;
     private String password;
 
-
-    @Override
-    public String toString() {
-        return "LoginDto{" +
-                "loginId='" + loginId + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
 }

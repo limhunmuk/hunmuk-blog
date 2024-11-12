@@ -1,19 +1,20 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import axios from "axios";
-
-import {useRouter} from "vue-router";
-
+import { useRouter } from "vue-router";
 const route = useRouter();
 
 const posts = ref([]);
 const getPosts = async () => {
-  const response = await axios.get('http://localhost:8080/api/post');
+  const response = await axios.get('/api/post', {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  });
   posts.value = response.data;
 }
 
 getPosts();
-
 const create = () => {
   route.push({name: 'create'});
 }

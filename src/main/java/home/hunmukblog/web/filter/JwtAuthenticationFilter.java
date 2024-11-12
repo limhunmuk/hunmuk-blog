@@ -50,6 +50,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
         try {
+
             LoginDto loginRequest = new ObjectMapper().readValue(request.getInputStream(), LoginDto.class);
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                     loginRequest.getLoginId(), loginRequest.getPassword());

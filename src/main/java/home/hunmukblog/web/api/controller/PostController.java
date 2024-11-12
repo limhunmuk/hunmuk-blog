@@ -6,6 +6,7 @@ import home.hunmukblog.domain.post.dto.PostUpdate;
 import home.hunmukblog.domain.post.entity.Post;
 import home.hunmukblog.web.api.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,15 +46,14 @@ public class PostController {
      * @param request
      * @return
      */
-
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/api/post")
-    public Post PostCreate(@RequestBody PostCreate request) {
+    public ResponseEntity<?> PostCreate(@RequestBody PostCreate request) {
 
         System.out.println(" ============================================== " );
         System.out.println("request = " + request);
         System.out.println(" ============================================== " );
-        return postService.savePost(request);
+        Post post = postService.savePost(request);
+        return ResponseEntity.ok().body(post);
     }
 
     /**
@@ -62,7 +62,6 @@ public class PostController {
      * @param request
      * @return
      */
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/api/post/{id}")
     public Post PostUpdate(@PathVariable Long id, @RequestBody PostUpdate request) {
 
@@ -77,7 +76,6 @@ public class PostController {
      * @param id
      * @return
      */
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/api/post/{id}")
     public void PostDelete(@PathVariable Long id) {
 
@@ -86,5 +84,4 @@ public class PostController {
         System.out.println(" ============================================== " );
         postService.deletePost(id);
     }
-
 }

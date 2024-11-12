@@ -25,14 +25,14 @@ Content-Type: application/json
 
 GET http://localhost:8080/user
 
-"Authorization: Bearer {eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczMTIyNjk5NCwiZXhwIjoxNzMxMjI3MDgwfQ.RLzNnAe0OwvU-1hSpriUrPCXtJ7XLKH-XkmUX8Q46uHnTO1F2XLorhO4mrT9X7Cryj5CaQQPhtjbMlfp9Sm8Ug}"
+"Authorization: Bearer {eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczMTM5OTkxNCwiZXhwIjoxNzMxNDg2MzE0fQ.8khLuBGHoULeOrse--_rsaKQvKMs8pv7b6NaKtzeRVJyBWE5sZBruKgbo53vmd4tciLp5Eug1uEeHFU4M91Tcw}"
 
 
 ### 관리자 페이지
 
 GET http://localhost:8080/admin
 
-"Authorization : Bearer {eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczMTIyNjk5NCwiZXhwIjoxNzMxMjI3MDgwfQ.RLzNnAe0OwvU-1hSpriUrPCXtJ7XLKH-XkmUX8Q46uHnTO1F2XLorhO4mrT9X7Cryj5CaQQPhtjbMlfp9Sm8Ug}"
+"Authorization: Bearer {eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczMTM5OTkxNCwiZXhwIjoxNzMxNDg2MzE0fQ.8khLuBGHoULeOrse--_rsaKQvKMs8pv7b6NaKtzeRVJyBWE5sZBruKgbo53vmd4tciLp5Eug1uEeHFU4M91Tcw}"
 
 
 ### 메인 페이지

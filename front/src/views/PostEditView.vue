@@ -15,7 +15,11 @@ const props = defineProps({
 onMounted(() => {
   console.log("수정화면입니다 >>>" + props.postId);
 
-  axios.get('/api/post/' + props.postId)
+  axios.get('/api/post/' + props.postId, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  })
     .then((response) => {
       console.log(response);
       post.value = response.data;
@@ -24,12 +28,21 @@ onMounted(() => {
 
 const edit = () => {
 
-  axios.put('/api/post/' + props.postId, {
-    title: post.value.title,
-    content: post.value.content
-  }).then((response) => {
+  const token = localStorage.getItem("token");
+  axios.put('/api/post/'+ props.postId, {
+      title: post.value.title,
+      content: post.value.content
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then((response) => {
     console.log(response);
-    route.push({name: 'detail', params: {postId: props.postId}});
+
+    alert("수정 되었습니다.");
+
+    route.replace('/post');
   }).catch((error) => {
     console.log(error);
   });

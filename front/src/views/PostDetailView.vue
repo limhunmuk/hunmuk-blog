@@ -14,13 +14,24 @@ const props = defineProps({
 })
 onMounted(() => {
   console.log("상세화면입니다 >>>" + props.postId);
+  const token = localStorage.getItem("token");
 
-  axios.get('/api/post/' + props.postId)
-    .then((response) => {
-      console.log(response);
-      post.value = response.data;
-    });
+  axios.get('/api/post/' + props.postId, {
+    headers: {
+      Authorization: `Bearer ${token}`
+
+  }})
+.then((response) => {
+    console.log(response);
+
+
+    post.value = response.data;
+  }).catch((error) => {
+    console.log(error);
+  });
+
 });
+
 
 const deletePost = () => {
 

@@ -60,7 +60,7 @@ public class SecurityConfig {
                             //auth.requestMatchers("/api/login").permitAll()
                             //.requestMatchers("/api/signup").authenticated()
                            //auth.anyRequest().permitAll() // 모든 요청에 대해 인증을 요구하지 않음
-                            auth.requestMatchers("/api/login").permitAll() // 로그인 엔드포인트 접근 허용
+                            auth.requestMatchers("/", "/api/login").permitAll() // 로그인 엔드포인트 접근 허용
                             .anyRequest().authenticated() // 다른 모든 요청은 인증 필요
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class) // 로그인 필터 먼저 추가

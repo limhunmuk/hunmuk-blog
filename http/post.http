@@ -2,6 +2,7 @@
 
 POST http://localhost:8080/api/post
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczMTQwMDExMiwiZXhwIjoxNzMxNDg2NTEyfQ.9AT508Mjtb5tHNGHIp_kBgpLC3rcOo5MtCOw5iPgnKf6QnebDJEG2RDnfD4y-dKyIS_cfTEXq8EFgoHLDWymKw
 
 {
   "title": "제목입니다.",

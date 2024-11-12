@@ -11,6 +11,7 @@ import { RouterLink, RouterView } from 'vue-router'
           <RouterLink to="/">프로필</RouterLink>
           <RouterLink to="/post">게시글</RouterLink>
           <RouterLink to="/letter">남기신글</RouterLink>
+          <RouterLink to="/login">로그인</RouterLink>
       </el-row>
       <el-row id="h-bottom">
       </el-row>
