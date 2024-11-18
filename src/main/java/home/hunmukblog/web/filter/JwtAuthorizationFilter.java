@@ -28,7 +28,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String jwtToken = authHeader.substring(7); // "Bearer " 제거
-            String username = jwtTokenUtil.getUsernameFromToken(jwtToken);
+            String username = jwtTokenUtil.getToken(jwtToken);
 
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 if (jwtTokenUtil.validateToken(jwtToken)) {

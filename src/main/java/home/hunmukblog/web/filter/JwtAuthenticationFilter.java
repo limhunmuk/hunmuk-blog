@@ -65,7 +65,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
 
         String username = authResult.getName();
-        String token = jwtTokenUtil.generateToken(username);
+        String token = jwtTokenUtil.createToken(username);
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

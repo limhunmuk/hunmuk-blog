@@ -3,7 +3,6 @@ package home.hunmukblog.web.config.jwt;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -16,7 +15,7 @@ public class JwtTokenUtil {
     private long jwtExpirationMs = 86400000L; // 24 hours
 
     // JWT 토큰 생성
-    public String generateToken(String username) {
+    public String createToken(String username) {
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date())
@@ -26,7 +25,7 @@ public class JwtTokenUtil {
     }
 
     // JWT 토큰에서 사용자 이름 추출
-    public String getUsernameFromToken(String token) {
+    public String getToken(String token) {
         Claims claims = Jwts.parser()
                 .setSigningKey(jwtSecret)
                 .parseClaimsJws(token)

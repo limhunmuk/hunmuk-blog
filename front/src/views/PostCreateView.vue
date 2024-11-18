@@ -3,13 +3,16 @@ import {onMounted, defineProps, ref} from 'vue';
 import axios from "axios";
 import {useRouter} from "vue-router";
 
+
 const route = useRouter();
 const post = ref({});
 
-function isTokenExpired(_token) {
-  if (!_token) return true; // 토큰이 없으면 유효하지 않음
 
-  const payloadBase64 = _token.split('.')[1]; // JWT는 "헤더.페이로드.서명" 형식
+function isTokenExpired() {
+  const token = localStorage.getItem("token");
+  if (!token) return true; // 토큰이 없으면 유효하지 않음
+
+  const payloadBase64 = token.split('.')[1]; // JWT는 "헤더.페이로드.서명" 형식
   const decodedPayload = JSON.parse(atob(payloadBase64));
 
   const exp = decodedPayload.exp * 1000; // `exp`는 초 단위이므로 밀리초로 변환
@@ -20,26 +23,25 @@ function isTokenExpired(_token) {
 
 const create = () => {
 
-  const token = localStorage.getItem("token");
-  if (isTokenExpired(token)) {
+  if (isTokenExpired()) {
     alert("토큰이 만료되었습니다.");
+    route.push("/login");
   }
 
-  alert(token);
   axios.post('/api/post', {
     title: post.value.title,
     content: post.value.content
   },
     {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${authStore.token}` // 헤더에 토큰 추가
       }
     }).then((response) => {
     console.log(response);
 
     alert("등록되었습니다.");
 
-    route.push('post');
+    route.push({name: 'detail', params: {postId: response.data.id}});
   }).catch((error) => {
     console.log(error);
   });
@@ -47,7 +49,6 @@ const create = () => {
 }
 
 </script>
-
 <template>
   <el-row class="my-3">
     <h1>등록</h1>

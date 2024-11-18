@@ -32,7 +32,7 @@ const loginProc = () => {
     localStorage.setItem("token", response.data.token);
 
 
-    //route.push("/post");
+    route.push("/post");
 
   }).catch((error) => {
     console.log(error);
