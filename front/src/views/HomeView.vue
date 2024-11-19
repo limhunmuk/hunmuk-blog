@@ -17,14 +17,22 @@ getPosts();
     <el-main>
       <el-row>
         <el-col>
-          <div>내용</div>
-          <div>내용</div>
-          <div>내용</div>
-          <div>내용</div>
-          <div>내용</div>
-          <div>내용</div>
-          <div>내용</div>
-          <el-button type="primary">등록</el-button>
+          <div>홈</div>
+          <div>홈</div>
+          <div>홈</div>
+          <div>홈</div>
+          <div>홈</div>
+          <div>홈</div>
+          <div>홈</div>
+          <div>홈</div>
+          <div>홈</div>
+          <div>홈</div>
+          <div>홈</div>
+          <div>홈</div>
+          <div>홈</div>
+          <div>홈</div>
+          <div>홈</div>
+          <div>홈</div>
         </el-col>
       </el-row>
     </el-main>

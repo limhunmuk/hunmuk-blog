@@ -5,6 +5,7 @@ import { useRouter } from "vue-router";
 const route = useRouter();
 
 const posts = ref([]);
+
 const getPosts = async () => {
   const response = await axios.get('/api/post', {
     headers: {

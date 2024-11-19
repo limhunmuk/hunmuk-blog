@@ -13,7 +13,7 @@ getPosts();
 
 <template>
   <el-row class="my-3">
-    <h1>남기신 글</h1>
+    <h1>문의하기</h1>
   </el-row>
   <br/>
   <div>

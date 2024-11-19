@@ -1,23 +1,23 @@
-package home.hunmukblog.domain.post.entity;
+package home.hunmukblog.domain.inquiry.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @Entity
+@Table(name = "inquiry", schema = "hlog")
 @SuperBuilder
-@Table(name = "post")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Post {
-
+@NoArgsConstructor
+public class Inquiry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "post_id", nullable = false)
-    private Long id;
+    @Column(name = "inquiry_id", nullable = false)
+    private Integer id;
 
     @Column(name = "title")
     private String title;
@@ -40,6 +40,5 @@ public class Post {
 
     @Column(name = "mod_id", length = 45)
     private String modId;
-
 
 }
