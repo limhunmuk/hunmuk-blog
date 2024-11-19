@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import axios from "axios";
 import { useRouter } from "vue-router";
 const route = useRouter();
@@ -15,19 +15,19 @@ const getPosts = async () => {
   posts.value = response.data;
 }
 
-getPosts();
-const create = () => {
-  if(isTokenExpired()) {
-    alert("토큰이 만료되었습니다.");
-    route.push("/login");
-  }else{
-    alert("토큰 있음");
-  }
+onMounted(() => {
+  getPosts();
+});
 
+const create = () => {
   route.push({name: 'create'});
 }
 
-function isTokenExpired() {
+const goToDetail = (postId: number) => {
+  route.push({name: 'detail', params:{postId : postId}});
+}
+
+/*function isTokenExpired() {
   const token = localStorage.getItem("token");
   if (!token) return true; // 토큰이 없으면 유효하지 않음
 
@@ -38,23 +38,61 @@ function isTokenExpired() {
   const currentTime = Date.now();
 
   return currentTime > exp; // 현재 시간이 만료 시간보다 크면 만료됨
-}
+}*/
 </script>
 <template>
-  <el-row class="my-3">
-    <h1>리스트</h1>
-  </el-row>
-  <el-row>
-    <ul>
-      <li v-for="item in posts" :key="item.id">
-        <router-link :to="{name: 'detail', params:{postId : item.id}}">{{ item.title }}> {{item.id}}</router-link>
-        <p>{{ item.content }}</p>
+
+  <div>
+    <h2>목록</h2>
+    <ul class="post-list">
+      <li v-for="(post, index) in posts" :key="post.id">
+        <span>{{ index + 1 }}</span>
+        <a @click="goToDetail(post.id)" style="cursor: pointer; color: #409EFF;">
+          {{ post.title }}
+        </a>
+        <span>{{ post.regId }}</span>
+        <span>{{ post.regDt }}</span>
       </li>
     </ul>
-  </el-row>
+  </div>
+
   <el-row>
     <el-col>
       <el-button type="primary" @click="create">등록</el-button>
     </el-col>
   </el-row>
+
 </template>
+<style scoped>
+h2 {
+  text-align: left;
+  padding-left: 100px;
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+.post-list {
+  list-style: none;
+  padding: 0;
+}
+
+.post-list li {
+  display: grid;
+  grid-template-columns: 5% auto 15% 15%; /* 5%, auto, 10%, 15%로 비율 설정 */
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.post-list li span,
+.post-list li a {
+  flex: 1;
+  text-align: center;
+}
+
+.post-list li a:hover {
+  text-decoration: underline;
+}
+.el-button {
+  margin-top: 15px;
+}
+</style>
