@@ -72,6 +72,10 @@ public class PostService {
             return postRepository.save(post);
     }
 
+    /**
+     * 게시글 삭제
+     * @param id
+     */
     public void deletePost(Long id) {
 
         Post post = postRepository.findById(id).orElse(null);
