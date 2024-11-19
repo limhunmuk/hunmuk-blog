@@ -32,10 +32,13 @@ onMounted(() => {
 
 });
 
-
 const deletePost = () => {
 
-  axios.delete('/api/post/' + props.postId)
+  axios.delete('/api/post/' + props.postId, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  })
     .then((response) => {
       console.log(response);
       route.push("/");
