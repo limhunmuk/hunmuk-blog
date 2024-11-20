@@ -12,7 +12,8 @@ public class JwtTokenUtil {
 
     private static String jwtSecret = "Y2hvcHBhLWRvbnQtYml0ZS1tZS1zcHJpbmctYm9vdC1qd3QtdGVzdC1zZWNyZXQta2V5LWNob3BwYS1kb250LWJpdGUtbWUtc3ByaW5nLWJvb3Qtand0LXRlc3Qtc2VjcmV0LWtleQo";
 
-    private long jwtExpirationMs = 86400000L; // 24 hours
+    private long jwtExpirationMs = 86400000L; // 엑세스 토큰 만료 시간: 24시간
+    private long refreshTokenExpirationMs = 2592000000L; // 리프레시 토큰 만료 시간: 30일
 
     // JWT 토큰 생성
     public String createToken(String username) {
@@ -29,7 +30,7 @@ public class JwtTokenUtil {
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationMs * 7)) // 7 days
+                .setExpiration(new Date(System.currentTimeMillis() + refreshTokenExpirationMs)) // 7 days
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
