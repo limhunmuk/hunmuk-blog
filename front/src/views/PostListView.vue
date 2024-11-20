@@ -6,13 +6,22 @@ const route = useRouter();
 
 const posts = ref([]);
 
-const getPosts = async () => {
-  const response = await axios.get('/api/post', {
+const currentPage = ref(1);
+const totalPages = ref(1);
+
+
+const getPosts = async (page = 1) => {
+  const response = await axios.get('/api/post?page='+page, {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`
     }
   });
-  posts.value = response.data;
+  console.log("=============================");
+  console.log(response.data);
+  console.log("=============================");
+  posts.value = response.data.content;
+  totalPages.value = response.data.totalPages;
+  currentPage.value = response.data.number + 1;
 }
 
 onMounted(() => {
@@ -26,6 +35,13 @@ const create = () => {
 const goToDetail = (postId: number) => {
   route.push({name: 'detail', params:{postId : postId}});
 }
+
+const changePage = (page: number) => {
+  alert("page >>> " + page);
+  if (page > 0 && page <= totalPages.value) {
+    getPosts(page);
+  }
+};
 
 /*function isTokenExpired() {
   const token = localStorage.getItem("token");
@@ -43,8 +59,16 @@ const goToDetail = (postId: number) => {
 <template>
 
   <div>
-    <h2>목록</h2>
+    <el-row class="my-3">
+      <h1>게시글</h1>
+    </el-row>
     <ul class="post-list">
+      <li class="ui-menu">
+        <span>번호</span>
+        <span>제목</span>
+        <span>작성자</span>
+        <span>작성일</span>
+      </li>
       <li v-for="(post, index) in posts" :key="post.id">
         <span>{{ index + 1 }}</span>
         <a @click="goToDetail(post.id)" style="cursor: pointer; color: #409EFF;">
@@ -56,9 +80,18 @@ const goToDetail = (postId: number) => {
     </ul>
   </div>
 
-  <el-row>
+
+  <div class="pagination">
+    <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1">이전</button>
+    <span v-for="page in totalPages" :key="page" :class="{ active: page === currentPage }" @click="changePage(page)">
+        {{ page }}
+      </span>
+    <button @click="changePage(currentPage + 1)" :disabled="currentPage === totalPages">다음</button>
+  </div>
+
+  <el-row class="button-row">
     <el-col>
-      <el-button type="primary" @click="create">등록</el-button>
+      <el-button class="el-button" type="primary" @click="create">등록</el-button>
     </el-col>
   </el-row>
 
@@ -68,6 +101,7 @@ h2 {
   text-align: left;
   padding-left: 100px;
   font-size: 24px;
+  margin-top: 30px;
   margin-bottom: 15px;
   color: #2c3e50;
 }
@@ -76,9 +110,16 @@ h2 {
   padding: 0;
 }
 
+.post-list li.ui-menu {
+  display: grid;
+  grid-template-columns: 5% auto 25% 25%; /* 5%, auto, 10%, 15%로 비율 설정 */
+  padding: 10px;
+  border-bottom: 1px solid #7d7d7d;
+}
+
 .post-list li {
   display: grid;
-  grid-template-columns: 5% auto 15% 15%; /* 5%, auto, 10%, 15%로 비율 설정 */
+  grid-template-columns: 5% auto 25% 25%; /* 5%, auto, 10%, 15%로 비율 설정 */
   padding: 10px;
   border-bottom: 1px solid #ddd;
 }
@@ -92,7 +133,36 @@ h2 {
 .post-list li a:hover {
   text-decoration: underline;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 8px;
+}
+
+.pagination span {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.pagination span.active {
+  font-weight: bold;
+  color: #409EFF;
+}
+
+.pagination button {
+  padding: 5px 10px;
+}
+
+.button-row {
+  text-align: right;
+  margin-top: 15px;
+}
+
 .el-button {
   margin-top: 15px;
+  margin-right: 100px;
 }
 </style>

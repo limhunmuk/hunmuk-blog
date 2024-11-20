@@ -17,7 +17,7 @@ onMounted(() => {
 
   axios.get('/api/post/' + props.postId, {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`
     }
   })
     .then((response) => {
@@ -28,14 +28,13 @@ onMounted(() => {
 
 const edit = () => {
 
-  const token = localStorage.getItem("token");
   axios.put('/api/post/'+ props.postId, {
       title: post.value.title,
       content: post.value.content
     },
     {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`
       }
     }).then((response) => {
     console.log(response);

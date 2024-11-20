@@ -56,6 +56,6 @@ export default router
 
 
 router.beforeEach((to, from, next) => {
-  if (to.name !== 'login' && !localStorage.getItem('token')) next({ name: 'login' })
+  if (to.name !== 'login' && !localStorage.getItem('accessToken')) next({ name: 'login' })
   else next()
 });

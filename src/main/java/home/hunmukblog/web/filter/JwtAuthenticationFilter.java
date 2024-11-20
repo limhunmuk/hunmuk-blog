@@ -65,13 +65,15 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
 
         String username = authResult.getName();
-        String token = jwtTokenUtil.createToken(username);
+        String accessToken = jwtTokenUtil.createToken(username);
+        String refreshToken = jwtTokenUtil.createRefreshToken(username);
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
         Map<String, String> tokenMap = new HashMap<>();
-        tokenMap.put("token", token);
+        tokenMap.put("accessToken", accessToken);
+        tokenMap.put("refreshToken", refreshToken);
         new ObjectMapper().writeValue(response.getWriter(), tokenMap);
     }
 

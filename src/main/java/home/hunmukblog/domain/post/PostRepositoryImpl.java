@@ -1,10 +1,14 @@
 package home.hunmukblog.domain.post;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import home.hunmukblog.domain.post.dto.PostSearch;
 import home.hunmukblog.domain.post.entity.Post;
 import jakarta.persistence.EntityManager;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,14 +27,28 @@ public class PostRepositoryImpl implements PostRepositoryCustom {
 
 
     @Override
-    public List<Post> searchPostList(PostSearch postSearch) {
-        return queryFactory
+    public Page<Post> searchPostList(PostSearch postSearch, Pageable pageable) {
+        List<Post> content = queryFactory
                 .selectFrom(post)
                 .where(
                         containTitle(postSearch.getTitle()),
                         containContent(postSearch.getContent())
                 )
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .fetch();
+
+        JPAQuery<Long> countQuery = queryFactory
+                .select(
+                        post.count()
+                )
+                .from(post)
+                .where(
+                        containTitle(postSearch.getTitle()),
+                        containContent(postSearch.getContent())
+                );
+
+        return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
     }
 
     @Override

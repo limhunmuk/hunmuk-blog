@@ -29,8 +29,8 @@ const loginProc = () => {
     alert("로그인 성공");
 
     console.log(response.data);
-    localStorage.setItem("token", response.data.token);
-
+    localStorage.setItem("accessToken", response.data.accessToken);
+    localStorage.setItem("refreshToken", response.data.refreshToken);
 
     route.push("/post");
 

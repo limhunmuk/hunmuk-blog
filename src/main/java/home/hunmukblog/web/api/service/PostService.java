@@ -6,6 +6,9 @@ import home.hunmukblog.domain.post.dto.PostSearch;
 import home.hunmukblog.domain.post.dto.PostUpdate;
 import home.hunmukblog.domain.post.entity.Post;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -22,8 +25,8 @@ public class PostService {
      * @param postSearch
      * @return
      */
-    public List<Post> searchPostList(PostSearch postSearch) {
-        return postRepository.searchPostList(postSearch);
+    public Page<Post> searchPostList(PostSearch postSearch, Pageable pageable) {
+        return postRepository.searchPostList(postSearch, pageable);
     }
 
     /**

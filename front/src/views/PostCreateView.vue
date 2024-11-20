@@ -3,6 +3,7 @@ import {onMounted, defineProps, ref} from 'vue';
 import axios from "axios";
 import {useRouter} from "vue-router";
 
+
 const route = useRouter();
 const post = ref({});
 
@@ -14,7 +15,7 @@ const create = () => {
   },
     {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`
       }
     }).then((response) => {
     console.log(response);
@@ -27,8 +28,8 @@ const create = () => {
   });
 
 }
-
 </script>
+
 <template>
   <el-row class="my-3">
     <h1>등록</h1>

@@ -1,14 +1,21 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import axios from "axios";
 
-const posts = ref([]);
-const getPosts = async () => {
-  const response = await axios.get('/api/post');
-  posts.value = response.data;
+const inquiries = ref([]);
+const getInquiry = async () => {
+  const response = await axios.get('/api/inquiry', {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+    }
+  });
+  inquiries.value = response.data;
 }
 
-getPosts();
+
+onMounted(() => {
+  getInquiry();
+});
 </script>
 
 <template>
@@ -18,7 +25,7 @@ getPosts();
   <br/>
   <div>
     <ul>
-      <li v-for="item in posts" :key="item.id">
+      <li v-for="item in inquiries" :key="item.id">
         <router-link :to="{name: 'detail', params:{postId : item.id}}">{{ item.title }}> {{item.id}}</router-link>
         <p>{{ item.content }}</p>
       </li>

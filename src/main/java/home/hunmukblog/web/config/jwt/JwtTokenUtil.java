@@ -24,6 +24,16 @@ public class JwtTokenUtil {
                 .compact();
     }
 
+    // 리프레시 토큰 생성
+    public String createRefreshToken(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationMs * 7)) // 7 days
+                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .compact();
+    }
+
     // JWT 토큰에서 사용자 이름 추출
     public String getToken(String token) {
         Claims claims = Jwts.parser()

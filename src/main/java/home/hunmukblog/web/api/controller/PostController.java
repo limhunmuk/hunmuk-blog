@@ -6,11 +6,17 @@ import home.hunmukblog.domain.post.dto.PostUpdate;
 import home.hunmukblog.domain.post.entity.Post;
 import home.hunmukblog.web.api.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.util.StringUtils.hasText;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,14 +26,27 @@ public class PostController {
 
     /**
      * 게시글 목록 조회
-     * @param search
+     * @param condition
      * @return
      */
     @GetMapping("/api/post")
-    public List<Post> posts(PostSearch search) {
+    public Page<Post> posts(PostSearch condition) {
 
-        List<Post> posts = postService.searchPostList(search);
-        return posts;
+        int setPage = 1;
+        int setSize = 10;
+
+        String page = condition.getPage();
+        String size = condition.getSize();
+
+        if (hasText(page) && page.matches("^\\d+$")) setPage = Math.max(Integer.parseInt(page), 1);
+        if (hasText(size) && size.matches("^\\d+$")) setSize = Math.max(Integer.parseInt(size), 1);
+
+        condition.setPage(String.valueOf(setPage));
+        condition.setSize(String.valueOf(setSize));
+
+        Pageable pageable = PageRequest.of(setPage - 1, setSize, Sort.by("id").descending());
+
+        return postService.searchPostList(condition, pageable);
     }
 
     /**
