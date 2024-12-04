@@ -78,7 +78,6 @@ public class SecurityConfig {
         //JwtAuthenticationFilter filter = new JwtAuthenticationFilter("/api/login", objectMapper);
         JwtAuthenticationFilter filter = new JwtAuthenticationFilter(authenticationManager(), jwtTokenUtil, "/api/login");
 
-
         filter.setAuthenticationManager(authenticationManager());
         //filter.setAuthenticationSuccessHandler(new SimpleUrlAuthenticationSuccessHandler("/"));
         filter.setAuthenticationSuccessHandler(new LoginSuccessHandler());
@@ -88,7 +87,8 @@ public class SecurityConfig {
 
         SpringSessionRememberMeServices rememberMeServices = new SpringSessionRememberMeServices();
         rememberMeServices.setAlwaysRemember(true);
-        rememberMeServices.setValiditySeconds(3600 * 24 * 30);
+        rememberMeServices.setValiditySeconds(3600 * 24 * 30); // 30일
+        //rememberMeServices.setValiditySeconds(60 * 5); // 5분
         filter.setRememberMeServices(rememberMeServices);
         return filter;
     }

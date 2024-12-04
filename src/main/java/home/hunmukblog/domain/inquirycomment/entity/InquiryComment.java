@@ -2,7 +2,9 @@ package home.hunmukblog.domain.inquirycomment.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -10,8 +12,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-
 @Table(name = "inquiry_comment", schema = "hlog")
+@SuperBuilder
+@NoArgsConstructor
 public class InquiryComment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

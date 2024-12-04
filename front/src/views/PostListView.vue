@@ -13,15 +13,30 @@ const totalPages = ref(1);
 const getPosts = async (page = 1) => {
   const response = await axios.get('/api/post?page='+page, {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      refreshToken : localStorage.getItem("refreshToken")
+
     }
-  });
-  console.log("=============================");
-  console.log(response.data);
-  console.log("=============================");
-  posts.value = response.data.content;
-  totalPages.value = response.data.totalPages;
-  currentPage.value = response.data.number + 1;
+  })
+    .then((response) => {
+      //console.log(response);
+      posts.value = response.data.content;
+      totalPages.value = response.data.totalPages;
+      currentPage.value = response.data.number + 1;
+
+      console.log("=============================");
+      console.log(response);
+      console.log("=============================");
+
+    }).catch((error) => {
+      console.log(error);
+      alert("로그인이 필요합니다.");
+      route.push({name: 'login'});
+    });
+
+  //posts.value = response.data.content;
+  //totalPages.value = response.data.totalPages;
+  //currentPage.value = response.data.number + 1;
 }
 
 onMounted(() => {
@@ -33,7 +48,7 @@ const create = () => {
 }
 
 const goToDetail = (postId: number) => {
-  route.push({name: 'detail', params:{postId : postId}});
+  route.push({name: 'postDetail', params:{postId : postId}});
 }
 
 const changePage = (page: number) => {
@@ -60,7 +75,7 @@ const changePage = (page: number) => {
 
   <div>
     <el-row class="my-3">
-      <h1>게시글</h1>
+      <h5>게시글이 표현됩니다</h5>
     </el-row>
     <ul class="post-list">
       <li class="ui-menu">
@@ -79,8 +94,6 @@ const changePage = (page: number) => {
       </li>
     </ul>
   </div>
-
-
   <div class="pagination">
     <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1">이전</button>
     <span v-for="page in totalPages" :key="page" :class="{ active: page === currentPage }" @click="changePage(page)">
@@ -88,7 +101,6 @@ const changePage = (page: number) => {
       </span>
     <button @click="changePage(currentPage + 1)" :disabled="currentPage === totalPages">다음</button>
   </div>
-
   <el-row class="button-row">
     <el-col>
       <el-button class="el-button" type="primary" @click="create">등록</el-button>
@@ -97,7 +109,7 @@ const changePage = (page: number) => {
 
 </template>
 <style scoped>
-h2 {
+h5 {
   text-align: left;
   padding-left: 100px;
   font-size: 24px;

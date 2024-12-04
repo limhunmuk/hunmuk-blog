@@ -1,0 +1,16 @@
+### 문의댓글 작성
+
+POST http://localhost:8080/api/inquiry/1/comment
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczMzEyNTEwOCwiZXhwIjoxNzMzMjExNTA4fQ.4WO9RajriuZEXnWtZZgQTlrW1crEzQ2Mmv9T9fT4t4jxEuGzZWABGjDMH2feWWlFCTmkEQSErM5AfV0hwaesNw
+
+{
+  inquriyId: 1,
+  "content": "코멘트입니다"
+}
+
+
+### 게시글 삭제
+
+DELETE http://localhost:8080/posts/3
+Content-Type: application/json

@@ -34,7 +34,7 @@ const deletePost = () => {
 
   axios.delete('/api/post/' + props.postId, {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`
     }
   })
     .then((response) => {
@@ -46,32 +46,57 @@ const deletePost = () => {
 
 }
 
+const cancle = () => {
+  route.replace('/post');
+}
+
 </script>
 
 <template>
-  <el-row class="my-3">
-    <h1>상세</h1>
+  <el-row class="my-3 mt-3">
+<!--    <h2>상세</h2>-->
   </el-row>
   <div>
     <el-row>
       <el-col>
-        <p>{{post.title}}</p>
+        <pre class="title-display">{{post.title}}</pre>
       </el-col>
     </el-row>
     <el-row>
-      <el-col>
-        <p>{{post.content}}</p>
+      <el-col class="content-display">
+        {{post.content}}
       </el-col>
     </el-row>
-    <el-row>
+    <el-row class="button-display">
       <el-col>
         <el-button type="primary" @click="route.push({name: 'edit', params: {postId: post.id}})">수정</el-button>
         <el-button type="info" @click="deletePost">삭제</el-button>
+        <el-button @click="cancle">뒤로</el-button>
       </el-col>
     </el-row>
   </div>
 
 </template>
 
-<style>
+<style scoped>
+
+.title-display {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* 상세 보기 스타일 */
+.content-display {
+  white-space: pre-wrap; /* 줄바꿈을 반영해 표시 */
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  height: 300px;
+}
+
+.button-display {
+  margin-top: 20px;
+}
+
 </style>

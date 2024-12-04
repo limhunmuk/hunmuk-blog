@@ -1,0 +1,26 @@
+### 문의글 작성
+
+POST http://localhost:8080/api/inquiry
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczMzEyNTEwOCwiZXhwIjoxNzMzMjExNTA4fQ.4WO9RajriuZEXnWtZZgQTlrW1crEzQ2Mmv9T9fT4t4jxEuGzZWABGjDMH2feWWlFCTmkEQSErM5AfV0hwaesNw
+
+{
+  "title": "문의글 작성요망.",
+  "content": "내용입니다."
+}
+
+
+### 문의글 조회
+
+GET http://localhost:8080/api/inquiry
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczMzEyNTEwOCwiZXhwIjoxNzMzMjExNTA4fQ.4WO9RajriuZEXnWtZZgQTlrW1crEzQ2Mmv9T9fT4t4jxEuGzZWABGjDMH2feWWlFCTmkEQSErM5AfV0hwaesNw
+
+### 문의글 삭제
+
+DELETE http://localhost:8080/api/inquiry/3
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczMzEyNTEwOCwiZXhwIjoxNzMzMjExNTA4fQ.4WO9RajriuZEXnWtZZgQTlrW1crEzQ2Mmv9T9fT4t4jxEuGzZWABGjDMH2feWWlFCTmkEQSErM5AfV0hwaesNw
+
+### "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczMzEyNTEwOCwiZXhwIjoxNzMzMjExNTA4fQ.4WO9RajriuZEXnWtZZgQTlrW1crEzQ2Mmv9T9fT4t4jxEuGzZWABGjDMH2feWWlFCTmkEQSErM5AfV0hwaesNw",
+###  "refreshToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczMzEyNTEwOCwiZXhwIjoxNzM1NzE3MTA4fQ.5oFrysvHdmiBqFu8-KIxALC-8bgpK1oCV2Mu3hq5M-j5k77R3lKMB--R5bgi8CZt_SnjiX17MgD4Os-iAJ875Q"

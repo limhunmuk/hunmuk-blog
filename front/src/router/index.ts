@@ -1,12 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import DetailView from '../views/PostDetailView.vue'
 
-let postView = import('@/views/PostListView.vue');
-let PoswCreateView = import('@/views/PostCreateView.vue');
+let PostView = import('@/views/PostListView.vue');
+let PostCreateView = import('@/views/PostCreateView.vue');
 let PostEditView = import('@/views/PostEditView.vue');
 let InquiryListView = import('@/views/InquiryListView.vue');
 let LoginView = import('@/views/LoginView.vue');
+let PostDetailView = import('@/views/PostDetailView.vue');
+let InquiryDetailView = import('@/views/InquiryDetailView.vue');
+let CountView = import('@/views/CountView.vue');
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -18,17 +20,17 @@ const router = createRouter({
     {
       path: '/post',
       name: 'post',
-      component: () => postView
+      component: () => PostView
     },
     {
       path: '/post/new',
       name: 'create',
-      component: () => PoswCreateView
+      component: () => PostCreateView
     },
     {
       path : '/post/:postId',
-      name: 'detail',
-        component: () => DetailView ,
+      name: 'postDetail',
+        component: () => PostDetailView,
         props: true
     },
     {
@@ -42,10 +44,20 @@ const router = createRouter({
      name: 'inquiry',
      component: () => InquiryListView
     },
+    {
+     path: '/inquiry/:inquiryId',
+     name: 'inquiryDetail',
+     component: () => InquiryDetailView,
+    },
    {
      path: '/login',
      name: 'login',
      component: () => LoginView
+    },
+{
+     path: '/calc',
+     name: 'calc',
+     component: () => CountView
     },
 
 
@@ -56,6 +68,6 @@ export default router
 
 
 router.beforeEach((to, from, next) => {
-  if (to.name !== 'login' && !localStorage.getItem('accessToken')) next({ name: 'login' })
+  if (to.name !== 'login' && (!localStorage.getItem('accessToken') || !localStorage.getItem('refreshToken'))) next({ name: 'login' })
   else next()
 });

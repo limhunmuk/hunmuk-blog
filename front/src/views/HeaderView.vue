@@ -11,8 +11,9 @@ import {RouterLink} from "vue-router";
     <el-row id="header_bottom">
       <RouterLink to="/">대시보드</RouterLink>
       <RouterLink to="/post">게시글</RouterLink>
-      <RouterLink to="/inquiry">문의하기</RouterLink>
+      <RouterLink to="/inquiry">공지사항</RouterLink>
       <RouterLink to="/statis">통계</RouterLink>
+      <RouterLink to="/calc">계산기</RouterLink>
     </el-row>
 </template>
 

@@ -2,12 +2,18 @@
 
 POST http://localhost:8080/api/post
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczMTQwMDExMiwiZXhwIjoxNzMxNDg2NTEyfQ.9AT508Mjtb5tHNGHIp_kBgpLC3rcOo5MtCOw5iPgnKf6QnebDJEG2RDnfD4y-dKyIS_cfTEXq8EFgoHLDWymKw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczMzEyNTEwOCwiZXhwIjoxNzMzMjExNTA4fQ.4WO9RajriuZEXnWtZZgQTlrW1crEzQ2Mmv9T9fT4t4jxEuGzZWABGjDMH2feWWlFCTmkEQSErM5AfV0hwaesNw
 
 {
   "title": "제목입니다.",
   "content": "내용입니다."
 }
+
+### 게시글 조회
+
+GET http://localhost:8080/api/post/4
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczMzEyNTEwOCwiZXhwIjoxNzMzMjExNTA4fQ.4WO9RajriuZEXnWtZZgQTlrW1crEzQ2Mmv9T9fT4t4jxEuGzZWABGjDMH2feWWlFCTmkEQSErM5AfV0hwaesNw
 
 
 ### 게시글 삭제

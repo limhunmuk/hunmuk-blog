@@ -5,10 +5,7 @@ import lombok.Data;
 @Data
 public class InquiryCommentUpdate {
 
+    private Long inquiryId;
     private String content;
-
-    public InquiryCommentUpdate(String content) {
-        this.content = content;
-    }
 
 }
