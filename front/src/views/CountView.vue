@@ -15,9 +15,9 @@ const { count, doubleCount, increment } = counterStore
 <template>
   <div>
     <h1>Pinia Counter Example</h1>
-    <p>Count: {{ count }}</p>
-    <p>Double Count: {{ doubleCount }}</p>
-    <button @click="increment">Increment</button>
+    <p>Count: {{ counterStore.count }}</p>
+    <p>Double Count: {{ counterStore.doubleCount }}</p>
+    <button @click="counterStore.increment">Increment</button>
   </div>
 </template>
 <style scoped>
