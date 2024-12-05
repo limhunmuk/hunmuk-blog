@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import axios from "axios";
+//import axios from "axios";
 import { useRouter } from "vue-router";
 const route = useRouter();
+
+import apiClient from "@/stores/authStore";
+
 
 const posts = ref([]);
 
@@ -11,32 +14,15 @@ const totalPages = ref(1);
 
 
 const getPosts = async (page = 1) => {
-  const response = await axios.get('/api/post?page='+page, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      refreshToken : localStorage.getItem("refreshToken")
-
-    }
-  })
-    .then((response) => {
+    const response = await apiClient.get('/post?page='+page);
       //console.log(response);
-      posts.value = response.data.content;
-      totalPages.value = response.data.totalPages;
-      currentPage.value = response.data.number + 1;
+    posts.value = response.data.content;
+    totalPages.value = response.data.totalPages;
+    currentPage.value = response.data.number + 1;
 
-      console.log("=============================");
-      console.log(response);
-      console.log("=============================");
-
-    }).catch((error) => {
-      console.log(error);
-      alert("로그인이 필요합니다.");
-      route.push({name: 'login'});
-    });
-
-  //posts.value = response.data.content;
-  //totalPages.value = response.data.totalPages;
-  //currentPage.value = response.data.number + 1;
+    console.log("=============================");
+    console.log(response);
+    console.log("=============================");
 }
 
 onMounted(() => {

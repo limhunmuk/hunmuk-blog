@@ -29,6 +29,11 @@ public class CommentController {
     @GetMapping("/api/inquiry/{id}/comment")
     public List<InquiryComment> inquiryList(InquiryCommentSearch search, @PathVariable Long id) {
 
+        if(id == null) {
+            throw new IllegalArgumentException("문의 일련번호가 필요합니다.");
+        }
+
+        search.setInquiryId(id);
         List<InquiryComment> commentList = commentService.searchCommentList(search);
         return commentList;
     }
@@ -65,7 +70,7 @@ public class CommentController {
      * @param request
      * @return
      */
-    @PutMapping("/api/comment/{commentId}")
+    @PutMapping("/api/inquiry/comment/{commentId}")
     public InquiryComment CommentUpdate(@PathVariable Long commentId, @RequestBody InquiryCommentUpdate request) {
 
         System.out.println(" ============================================== " );
@@ -80,7 +85,7 @@ public class CommentController {
      * @param commentId
      * @return
      */
-    @DeleteMapping("/api/comment/{commentId}")
+    @DeleteMapping("/api/inquiry/comment/{commentId}")
     public void CommentDelete(@PathVariable Long commentId) {
 
         System.out.println(" ============================================== " );

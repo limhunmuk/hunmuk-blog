@@ -67,13 +67,15 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class) // JWT 인증 필터 추가
                 .rememberMe(rm -> rm.rememberMeParameter("remember-me")
                         .alwaysRemember(false)
-                        .tokenValiditySeconds(2592000)
+                        .tokenValiditySeconds(60*5)
                 )
                 .csrf(AbstractHttpConfigurer::disable)
                 .build();
     }
 
+    // 사용안하고 있음
     //@Bean
+    /**
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
         //JwtAuthenticationFilter filter = new JwtAuthenticationFilter("/api/login", objectMapper);
         JwtAuthenticationFilter filter = new JwtAuthenticationFilter(authenticationManager(), jwtTokenUtil, "/api/login");
@@ -92,6 +94,7 @@ public class SecurityConfig {
         filter.setRememberMeServices(rememberMeServices);
         return filter;
     }
+**/
 
     @Bean
     public AuthenticationManager authenticationManager() {

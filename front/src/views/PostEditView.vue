@@ -7,20 +7,19 @@ import {useRouter} from "vue-router";
 const route = useRouter();
 const post = ref({});
 
+import apiClient from "@/stores/authStore";
+
 const props = defineProps({
   postId: {
     type: [Number, String],
     required: true
   }
-})
+});
+
 onMounted(() => {
   console.log("수정화면입니다 >>>" + props.postId);
 
-  axios.get('/api/post/' + props.postId, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("accessToken")}`
-    }
-  })
+  apiClient.get('/post/' + props.postId)
     .then((response) => {
       console.log(response);
       post.value = response.data;
@@ -29,24 +28,14 @@ onMounted(() => {
 
 const edit = () => {
 
-  axios.put('/api/post/'+ props.postId, {
+  apiClient.put('/post/'+ props.postId, {
       title: post.value.title,
       content: post.value.content
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        refreshToken : localStorage.getItem("refreshToken")
-      }
     }).then((response) => {
     console.log(response);
 
     alert("수정 되었습니다.");
     route.replace('/post');
-  }).catch((error) => {
-    console.log(error);
-    alert("로그인이 필요합니다.");
-    route.push({name: 'login'});
   });
 
 }

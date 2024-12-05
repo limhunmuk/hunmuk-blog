@@ -44,18 +44,22 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                 }
             }catch (JwtException e){
 
+                e.printStackTrace();
+
                 // 액세스 토큰이 만료된 경우 리프레시 토큰으로 새로운 액세스 토큰 발급
                 if (refreshTokenHeader != null) {
                     try {
-                        String refreshToken = refreshTokenHeader.substring(7); // "Bearer " 제거
+                        //String refreshToken = refreshTokenHeader.substring(7); // "Bearer " 제거
+                        String refreshToken = refreshTokenHeader;
                         String username = jwtTokenUtil.getToken(refreshToken);
 
                         if (username != null && jwtTokenUtil.validateToken(refreshToken)) {
                             // 새로운 액세스 토큰 발급 후, 응답 헤더에 추가
                             String newAccessToken = jwtTokenUtil.createToken(username);
-                            response.setHeader("Authorization", "Bearer " + newAccessToken);
+                            response.setHeader("Authorization", newAccessToken);
                         }
                     } catch (JwtException ex) {
+                        ex.printStackTrace();
                         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                         return;
                     }

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import InquiryEditView from "@/views/InquiryEditView.vue";
 
 let PostView = import('@/views/PostListView.vue');
 let PostCreateView = import('@/views/PostCreateView.vue');
@@ -48,8 +49,15 @@ const router = createRouter({
      path: '/inquiry/:inquiryId',
      name: 'inquiryDetail',
      component: () => InquiryDetailView,
+      props: true
     },
-   {
+    {
+     path: '/editInquiry/:inquiryId',
+     name: 'editInquiry',
+     component: () => InquiryEditView,
+      props: true
+    },
+    {
      path: '/login',
      name: 'login',
      component: () => LoginView

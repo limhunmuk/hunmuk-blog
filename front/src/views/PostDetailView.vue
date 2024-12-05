@@ -5,6 +5,7 @@ import {useRouter} from "vue-router";
 
 const route = useRouter();
 const post = ref({});
+import apiClient from "@/stores/authStore";
 
 const props = defineProps({
   postId: {
@@ -12,17 +13,10 @@ const props = defineProps({
     required: true
   }
 })
+
 onMounted(() => {
-  console.log("상세화면입니다 >>>" + props.postId);
-
-  axios.get('/api/post/' + props.postId, {
-    headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`
-  }})
-.then((response) => {
-    console.log(response);
-
-
+  apiClient.get('/post/' + props.postId)
+  .then((response) => {
     post.value = response.data;
   }).catch((error) => {
     console.log(error);
@@ -32,11 +26,7 @@ onMounted(() => {
 
 const deletePost = () => {
 
-  axios.delete('/api/post/' + props.postId, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("accessToken")}`
-    }
-  })
+  apiClient.delete('/post/' + props.postId)
     .then((response) => {
       console.log(response);
       route.push("/");
@@ -46,7 +36,7 @@ const deletePost = () => {
 
 }
 
-const cancle = () => {
+const cancel = () => {
   route.replace('/post');
 }
 
@@ -71,7 +61,7 @@ const cancle = () => {
       <el-col>
         <el-button type="primary" @click="route.push({name: 'edit', params: {postId: post.id}})">수정</el-button>
         <el-button type="info" @click="deletePost">삭제</el-button>
-        <el-button @click="cancle">뒤로</el-button>
+        <el-button @click="cancel">뒤로</el-button>
       </el-col>
     </el-row>
   </div>

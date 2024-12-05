@@ -27,7 +27,7 @@ public class CommentService {
      * @return
      */
     public List<InquiryComment> searchCommentList(InquiryCommentSearch search) {
-        return commentRepository.findAll();
+        return commentRepository.searchInquiryCommentList(search.getInquiryId());
     }
 
     /**

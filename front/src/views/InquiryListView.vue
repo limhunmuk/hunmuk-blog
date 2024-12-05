@@ -4,30 +4,20 @@ import axios from "axios";
 
 import { useRouter } from "vue-router";
 const router = useRouter();
-
+import apiClient from "@/stores/authStore";
 
 const inquiries = ref([]);
 const getInquiry = async () => {
-  const response = await axios.get('/api/inquiry', {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      refreshToken : localStorage.getItem("refreshToken")
-    }
-  })
-    .then((response) => {
-      console.log(response);
-      inquiries.value = response.data;
-    }).catch((error) => {
-      console.log(error);
-      alert("로그인이 필요합니다.");
-      router.push({name: 'login'});
-    });
-  ;
-  console.log("=============================");
-  console.log(response.data);
-  console.log("=============================");
 
-  inquiries.value = response.data;
+  const response = await apiClient.get('/inquiry')
+    .then((res) => {
+      console.log(res);
+      inquiries.value = res.data;
+
+      console.log("=============================");
+      console.log(res.data);
+      console.log("=============================");
+  });
 }
 
 onMounted(() => {
