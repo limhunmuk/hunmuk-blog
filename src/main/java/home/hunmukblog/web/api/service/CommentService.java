@@ -1,9 +1,5 @@
 package home.hunmukblog.web.api.service;
 
-import home.hunmukblog.domain.inquiry.dto.InquiryCreate;
-import home.hunmukblog.domain.inquiry.dto.InquirySearch;
-import home.hunmukblog.domain.inquiry.dto.InquiryUpdate;
-import home.hunmukblog.domain.inquiry.entity.Inquiry;
 import home.hunmukblog.domain.inquirycomment.InquiryCommentRepository;
 import home.hunmukblog.domain.inquirycomment.dto.InquiryCommentCreate;
 import home.hunmukblog.domain.inquirycomment.dto.InquiryCommentSearch;
