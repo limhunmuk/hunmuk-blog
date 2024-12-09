@@ -15,7 +15,8 @@ const getInquiry = async () => {
       inquiries.value = res.data;
 
       console.log("=============================");
-      console.log(res.data);
+      console.log(res.data[0].title);
+      console.log(res.data[0].content);
       console.log("=============================");
   });
 }

@@ -4,6 +4,7 @@ import home.hunmukblog.domain.inquirycomment.InquiryCommentRepository;
 import home.hunmukblog.domain.inquirycomment.dto.InquiryCommentCreate;
 import home.hunmukblog.domain.inquirycomment.dto.InquiryCommentSearch;
 import home.hunmukblog.domain.inquirycomment.dto.InquiryCommentUpdate;
+import home.hunmukblog.domain.inquirycomment.dto.InquiryCommentView;
 import home.hunmukblog.domain.inquirycomment.entity.InquiryComment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class CommentService {
      * @param search
      * @return
      */
-    public List<InquiryComment> searchCommentList(InquiryCommentSearch search) {
+    public List<InquiryCommentView> searchCommentList(InquiryCommentSearch search) {
         return commentRepository.searchInquiryCommentList(search.getInquiryId());
     }
 

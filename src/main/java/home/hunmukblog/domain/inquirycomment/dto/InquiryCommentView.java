@@ -9,6 +9,7 @@ public class InquiryCommentView {
 
     private Long inquiryId;
     private String content;
+    private String regId;
     private LocalDateTime regDt;
 
 }

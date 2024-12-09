@@ -4,26 +4,36 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import home.hunmukblog.domain.inquirycomment.dto.InquiryCommentView;
 import jakarta.persistence.EntityManager;
-import org.springframework.stereotype.Repository;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
 import static home.hunmukblog.domain.inquirycomment.entity.QInquiryComment.inquiryComment;
 
-@Repository
-public class InquiryCommentRepositoryImpl implements InquiryCommentRepositoryCustom {
+@SpringBootTest
+class InquiryCommentRepositoryImplTest {
 
-    private final JPAQueryFactory queryFactory;
+    @Autowired
+    EntityManager em;
 
-    public InquiryCommentRepositoryImpl(EntityManager em) {
-        this.queryFactory = new JPAQueryFactory(em);
+    JPAQueryFactory query;
+
+    @BeforeEach
+    public void before(){
+        query = new JPAQueryFactory(em);
+
+        System.out.println("======= 초기화 ======" );
     }
 
-    @Override
-    public List<InquiryCommentView> searchInquiryCommentList(Long id) {
+    @Test
+    @DisplayName("문의 댓글 목록 조회")
+    public void getComment(){
 
-        return
-                queryFactory
+        List<InquiryCommentView> list = query
                 .select(Projections.fields(InquiryCommentView.class,
                         inquiryComment.id,
                         inquiryComment.content,
@@ -32,10 +42,13 @@ public class InquiryCommentRepositoryImpl implements InquiryCommentRepositoryCus
                         inquiryComment.inquiry.id.as("inquiryId")
                 ))
                 .from(inquiryComment)
-                .where(inquiryComment.inquiry.id.eq(id))
-                .orderBy(inquiryComment.regDt.desc())
+                .where(inquiryComment.inquiry.id.eq(5L))
                 .fetch();
 
-    }
-}
+        list.forEach((f)->{
+            System.out.println("f = " + f);
+        });
 
+    }
+
+}

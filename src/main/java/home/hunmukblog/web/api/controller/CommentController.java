@@ -1,12 +1,9 @@
 package home.hunmukblog.web.api.controller;
 
-import home.hunmukblog.domain.inquiry.dto.InquiryCreate;
-import home.hunmukblog.domain.inquiry.dto.InquirySearch;
-import home.hunmukblog.domain.inquiry.dto.InquiryUpdate;
-import home.hunmukblog.domain.inquiry.entity.Inquiry;
 import home.hunmukblog.domain.inquirycomment.dto.InquiryCommentCreate;
 import home.hunmukblog.domain.inquirycomment.dto.InquiryCommentSearch;
 import home.hunmukblog.domain.inquirycomment.dto.InquiryCommentUpdate;
+import home.hunmukblog.domain.inquirycomment.dto.InquiryCommentView;
 import home.hunmukblog.domain.inquirycomment.entity.InquiryComment;
 import home.hunmukblog.web.api.service.CommentService;
 import lombok.RequiredArgsConstructor;
@@ -27,15 +24,14 @@ public class CommentController {
      * @return
      */
     @GetMapping("/api/inquiry/{id}/comment")
-    public List<InquiryComment> inquiryList(InquiryCommentSearch search, @PathVariable Long id) {
+    public List<InquiryCommentView> inquiryList(InquiryCommentSearch search, @PathVariable Long id) {
 
         if(id == null) {
             throw new IllegalArgumentException("문의 일련번호가 필요합니다.");
         }
 
         search.setInquiryId(id);
-        List<InquiryComment> commentList = commentService.searchCommentList(search);
-        return commentList;
+        return commentService.searchCommentList(search);
     }
 
     /**

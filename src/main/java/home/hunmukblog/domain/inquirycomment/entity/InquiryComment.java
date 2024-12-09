@@ -1,12 +1,12 @@
 package home.hunmukblog.domain.inquirycomment.entity;
 
+import home.hunmukblog.domain.inquiry.entity.Inquiry;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Getter
@@ -21,8 +21,12 @@ public class InquiryComment {
     @Column(name = "inquiry_comment_id", nullable = false)
     private Integer id;
 
-    @Column(name = "inquiry_id")
-    private Integer inquiryId;
+    //@Column(name = "inquiry_id")
+    //private Integer inquiryId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "inquiry_id")
+    private Inquiry inquiry;
 
     @Lob
     @Column(name = "content")
