@@ -19,14 +19,21 @@ const totalPages = ref(1);
 
 
 const getPosts = async (page = 1) => {
-    const response = await apiClient.get('/post?page='+page);
-    posts.value = response.data.content;
-    totalPages.value = response.data.totalPages;
-    currentPage.value = response.data.number + 1;
+    await apiClient.get('/post?page='+page)
+      .then((response) => {
+        posts.value = response.data.content;
+        totalPages.value = response.data.totalPages;
+        currentPage.value = response.data.number + 1;
 
-    console.log("=============================");
-    console.log(response);
-    console.log("=============================");
+        console.log("=============================");
+        console.log(response);
+        console.log("=============================");
+      })
+      .catch(() => {
+        alert('게시글 목록을 불러오는 중 오류 발생:');
+        route.replace('/login');
+      });
+
 }
 
 onMounted(() => {
@@ -47,18 +54,6 @@ const changePage = (page: number) => {
   }
 };
 
-/*function isTokenExpired() {
-  const token = localStorage.getItem("token");
-  if (!token) return true; // 토큰이 없으면 유효하지 않음
-
-  const payloadBase64 = token.split('.')[1]; // JWT는 "헤더.페이로드.서명" 형식
-  const decodedPayload = JSON.parse(atob(payloadBase64));
-
-  const exp = decodedPayload.exp * 1000; // `exp`는 초 단위이므로 밀리초로 변환
-  const currentTime = Date.now();
-
-  return currentTime > exp; // 현재 시간이 만료 시간보다 크면 만료됨
-}*/
 </script>
 <template>
 

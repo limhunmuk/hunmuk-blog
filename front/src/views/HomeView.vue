@@ -5,7 +5,7 @@
     <el-main>
       <el-row>
         <el-col>
-          <div style="width: 100%; height: 500px; background-color: #7d7d7d; color: #ffffff">현제 컨텐츠가 없습니다</div>
+          <router-link to="/login">로그인</router-link>
         </el-col>
       </el-row>
     </el-main>

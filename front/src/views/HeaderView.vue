@@ -22,7 +22,7 @@ import {RouterLink} from "vue-router";
 .logo {
   width: 40px;
   height: 40px;
-  background-image: url("/favicon.ico.bak");
+  background-image: url("/favicon.ico");
   background-size: contain;
   background-repeat: no-repeat;
 }

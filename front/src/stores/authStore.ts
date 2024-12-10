@@ -1,5 +1,6 @@
 // src/store/authStore.ts
 import axios from "axios";
+import router from "@/router";
 
 // Axios 인스턴스 생성
 const apiClient = axios.create({
@@ -20,14 +21,23 @@ apiClient.interceptors.request.use((config) => {
 
 // Axios 응답 인터셉터
 apiClient.interceptors.response.use(
-  (response) => response, // 응답 성공
+  (response) => {
+    //alert("응답 성공");
+    return response
+  }, // 응답 성공
   async (error) => {
+
     const originalRequest = error.config;
 
+    //alert("응답 실패 1 >" + (error.response?.status === 403));
+    //alert("응답 실패 2 >" + !originalRequest._retry);
+
     // 401 Unauthorized 발생 시 리프레시 토큰 사용
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    if ((error.response?.status === 401) && !originalRequest._retry) {
       originalRequest._retry = true; // 무한 루프 방지
       const refreshToken = localStorage.getItem("refreshToken");
+
+      //alert("응답 실패 3 >" + refreshToken);
 
       if (refreshToken) {
         try {
@@ -49,8 +59,12 @@ apiClient.interceptors.response.use(
           window.location.href = "/login"; // 로그인 페이지로 리다이렉트
         }
       }
+    }else{
+      alert("응답 실패 4 >" + error.response?.status);
+      //return Promise.reject(error); // 다른 에러는 그대로 반환
+      router.push({ name: "login" });
     }
-    return Promise.reject(error); // 다른 에러는 그대로 반환
+
   }
 );
 
