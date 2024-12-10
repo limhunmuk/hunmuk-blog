@@ -60,7 +60,6 @@ apiClient.interceptors.response.use(
         }
       }
     }else{
-      alert("응답 실패 4 >" + error.response?.status);
       //return Promise.reject(error); // 다른 에러는 그대로 반환
       router.push({ name: "login" });
     }

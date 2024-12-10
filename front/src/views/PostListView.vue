@@ -30,8 +30,6 @@ const getPosts = async (page = 1) => {
         console.log("=============================");
       })
       .catch(() => {
-        alert('게시글 목록을 불러오는 중 오류 발생:');
-        route.replace('/login');
       });
 
 }
