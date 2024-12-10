@@ -28,7 +28,8 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         String authHeader = request.getHeader("Authorization");
         String refreshTokenHeader = request.getHeader("refreshToken");
 
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+        //if (authHeader != null && authHeader.startsWith("Bearer ")) {
+        if (authHeader != null) {
             try {
 
                 String jwtToken = authHeader.substring(7); // "Bearer " 제거

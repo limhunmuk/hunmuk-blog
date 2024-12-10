@@ -89,3 +89,8 @@ bootJar {
         into "src/main/resources/static/docs"
     }
 }
+
+// plan-jar 생성안하는 설정
+jar {
+    enabled = false
+}

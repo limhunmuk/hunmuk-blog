@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
 import HeaderView from "@/views/HeaderView.vue";
 </script>
 
@@ -11,7 +10,7 @@ import HeaderView from "@/views/HeaderView.vue";
     <el-main>
       <RouterView />
     </el-main>
-</el-container>
+  </el-container>
 </template>
 
 <style scoped>
@@ -21,5 +20,4 @@ import HeaderView from "@/views/HeaderView.vue";
   align-items: center;
   width: 100%;
 }
-
 </style>

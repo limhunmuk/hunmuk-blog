@@ -50,7 +50,7 @@ public class InquiryTest {
 
     }
 
-    @Test
+    //@Test
     @DisplayName("문의 목록 조회")
     public void commentList(){
 

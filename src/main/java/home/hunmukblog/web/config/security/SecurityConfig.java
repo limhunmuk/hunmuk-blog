@@ -38,12 +38,13 @@ public class SecurityConfig {
     private final MemberDetailsService userDetailsService;
     private final JwtTokenUtil jwtTokenUtil;
 
-    @Bean
+    /**@Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return web -> web.ignoring()
                 .requestMatchers("/favicon.ico")
                 .requestMatchers("/error");
     }
+     */
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -107,5 +108,24 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    // vue js 설정시 추가해줘야 됨
+    // https://subbak2.com/11
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers(
+                // 원하는 URL들
+                "swagger-ui.html",      // Swagger 사용 시
+                "/index.html",          // Front-end에서 빌드된 static 파일
+                "/favicon.ico",         // 아이콘 파일
+                "/css/**",              // CSS 파일
+                "/fonts/**",            // 폰트 파일
+                "/img/**",              // 이미지 파일
+                "/js/**",                // JavaScript 파일
+                "/assets/**",           // 기타 자원 파일
+                "/docs/**"
+
+        );
     }
 }

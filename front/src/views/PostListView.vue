@@ -1,13 +1,18 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-//import axios from "axios";
 import { useRouter } from "vue-router";
 const route = useRouter();
 
-import apiClient from "@/stores/authStore";
+import apiClient from "@/stores/authStore.ts";
 
+interface Post {
+  id: number;
+  title: string;
+  regId: string;
+  regDt: string;
+}
 
-const posts = ref([]);
+const posts = ref<Post[]>([]);
 
 const currentPage = ref(1);
 const totalPages = ref(1);
@@ -15,7 +20,6 @@ const totalPages = ref(1);
 
 const getPosts = async (page = 1) => {
     const response = await apiClient.get('/post?page='+page);
-      //console.log(response);
     posts.value = response.data.content;
     totalPages.value = response.data.totalPages;
     currentPage.value = response.data.number + 1;
@@ -38,7 +42,6 @@ const goToDetail = (postId: number) => {
 }
 
 const changePage = (page: number) => {
-  alert("page >>> " + page);
   if (page > 0 && page <= totalPages.value) {
     getPosts(page);
   }
