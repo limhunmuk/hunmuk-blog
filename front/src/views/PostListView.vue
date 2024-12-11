@@ -43,7 +43,7 @@ const create = () => {
 }
 
 const goToDetail = (postId: number) => {
-  route.push({name: 'postDetail', params:{postId : postId}});
+  route.push({name: 'detail', params:{postId : postId}});
 }
 
 const changePage = (page: number) => {
