@@ -1,5 +1,7 @@
 package home.hunmukblog.web.api.service;
 
+import home.hunmukblog.domain.inquiry.InquiryRepository;
+import home.hunmukblog.domain.inquiry.entity.Inquiry;
 import home.hunmukblog.domain.inquirycomment.InquiryCommentRepository;
 import home.hunmukblog.domain.inquirycomment.dto.InquiryCommentCreate;
 import home.hunmukblog.domain.inquirycomment.dto.InquiryCommentSearch;
@@ -16,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CommentService {
 
+    private final InquiryRepository inquiryRepository;
     private final InquiryCommentRepository commentRepository;
 
     /**
@@ -43,7 +46,10 @@ public class CommentService {
      */
     public InquiryComment saveComment(InquiryCommentCreate request) {
 
+        Inquiry inquiry = inquiryRepository.findById(request.getInquiryId()).orElseThrow(() -> new IllegalArgumentException("해당 문의글이 존재하지 않습니다."));
+
         InquiryComment comment = InquiryComment.builder()
+                .inquiry(inquiry)
                 .content(request.getContent())
                 .regId("auto")
                 .regDt(LocalDateTime.now())

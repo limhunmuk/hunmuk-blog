@@ -29,9 +29,9 @@ public class InquiryController {
      * @return
      */
     @GetMapping("/api/inquiry")
-    public List<Inquiry> inquiryList(InquirySearch search) {
+    public List<InquiryView> inquiryList(InquirySearch search) {
 
-        List<Inquiry> inquiries = inquiryService.searchInquiryList(search);
+        List<InquiryView> inquiries = inquiryService.searchInquiryList(search);
         return inquiries;
     }
 
@@ -42,7 +42,6 @@ public class InquiryController {
      */
     @GetMapping("/api/inquiry/{id}")
     public Inquiry inquiryDetail(@PathVariable Long id) {
-
         return inquiryService.searcInquiryDetail(id);
     }
 

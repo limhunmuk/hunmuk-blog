@@ -5,6 +5,7 @@ import home.hunmukblog.domain.inquiry.InquiryRepositoryImpl;
 import home.hunmukblog.domain.inquiry.dto.InquiryCreate;
 import home.hunmukblog.domain.inquiry.dto.InquirySearch;
 import home.hunmukblog.domain.inquiry.dto.InquiryUpdate;
+import home.hunmukblog.domain.inquiry.dto.InquiryView;
 import home.hunmukblog.domain.inquiry.entity.Inquiry;
 import home.hunmukblog.domain.post.PostRepository;
 import home.hunmukblog.domain.post.dto.PostCreate;
@@ -28,8 +29,8 @@ public class InquiryService {
      * @param search
      * @return
      */
-    public List<Inquiry> searchInquiryList(InquirySearch search) {
-        return inquiryRepository.findAll();
+    public List<InquiryView> searchInquiryList(InquirySearch search) {
+        return inquiryRepository.searchInquiryList(search);
     }
 
     /**

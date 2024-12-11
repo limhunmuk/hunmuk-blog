@@ -44,7 +44,7 @@ const cancelInquiry = () => {
 
 <template>
   <el-row class="my-3 mt-3">
-<!--    <h2>수정</h2>-->
+    <h2>문의 수정</h2>
   </el-row>
   <el-form :model="inquiry" label-width="auto" style="max-width: 600px">
     <el-form-item label="제목">

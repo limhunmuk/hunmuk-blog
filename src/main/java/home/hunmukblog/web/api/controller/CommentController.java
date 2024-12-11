@@ -54,8 +54,9 @@ public class CommentController {
     public ResponseEntity<?> CommentCreate(@RequestBody InquiryCommentCreate request, @PathVariable Long id) {
 
         System.out.println(" ============================================== " );
-        System.out.println("request = " + request);
+        System.out.println(" comment request = " + request);
         System.out.println(" ============================================== " );
+        request.setInquiryId(id);
         InquiryComment comment = commentService.saveComment(request);
         return ResponseEntity.ok().body(comment);
     }
@@ -70,7 +71,7 @@ public class CommentController {
     public InquiryComment CommentUpdate(@PathVariable Long commentId, @RequestBody InquiryCommentUpdate request) {
 
         System.out.println(" ============================================== " );
-        System.out.println("request = " + request);
+        System.out.println("comment request = " + request);
         System.out.println(" ============================================== " );
         InquiryComment comment = commentService.updateComment(commentId, request);
         return comment;

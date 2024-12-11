@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+const route = useRouter();
 
 import apiClient from "@/stores/authStore";
 
@@ -29,29 +31,40 @@ const getInquiry = async () => {
 onMounted(() => {
   getInquiry();
 });
+
+const create = () => {
+  route.push({name: 'inquiryCreate'});
+}
 </script>
 
 <template>
-  <div>
-    <el-row class="my-3">
-      <h1>공지사항</h1>
-    </el-row>
-    <ul class="inquiry-list">
-      <li class="ui-menu">
-        <span>번호</span>
-        <span>제목</span>
-        <span>작성자</span>
-        <span>작성일</span>
-      </li>
-      <li v-for="item in inquiries" :key="item.id">
-        <span>{{ item.id }}</span>
-<!--        <span>{{ item.title }}</span>-->
-        <router-link :to="{name: 'inquiryDetail', params:{inquiryId : item.id}}">{{ item.title }}</router-link>
-        <span>{{ item.regId }}</span>
-        <span>{{ item.regDt }}</span>
-      </li>
-    </ul>
-  </div>
+  <el-row class="my-3">
+    <h1>공지사항</h1>
+  </el-row>
+  <el-row>
+    <el-col>
+      <ul class="inquiry-list">
+        <li class="ui-menu">
+          <span>번호</span>
+          <span>제목</span>
+          <span>작성자</span>
+          <span>작성일</span>
+        </li>
+        <li v-for="item in inquiries" :key="item.id">
+          <span>{{ item.id }}</span>
+  <!--        <span>{{ item.title }}</span>-->
+          <router-link :to="{name: 'inquiryDetail', params:{inquiryId : item.id}}">{{ item.title }}</router-link>
+          <span>{{ item.regId }}</span>
+          <span>{{ item.regDt }}</span>
+        </li>
+      </ul>
+    </el-col>
+  </el-row>
+  <el-row class="button-row">
+    <el-col>
+      <el-button class="el-button" type="primary" @click="create">등록</el-button>
+    </el-col>
+  </el-row>
 </template>
 
 <style scoped>
@@ -92,9 +105,13 @@ h1 {
   text-decoration: underline;
 }
 
+.button-row {
+  text-align: right;
+  margin-top: 15px;
+}
 
-.pagination {
-  display: flex;
-  justify-content: center;
+.el-button {
+  margin-top: 15px;
+  margin-right: 100px;
 }
 </style>

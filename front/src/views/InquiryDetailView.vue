@@ -18,20 +18,17 @@ interface Comment {
 const route = useRouter();
 const inquiry = ref<{ id?: number; title?: string; content?: string }>({}); // 초기 상태 정의
 const comments = ref<Comment[]>([]); // 댓글 리스트는 배열로 초기화
-
 const commentsVisible = ref(false); // 댓글 표시 상태
-
 const toggleComments = () => {
   commentsVisible.value = !commentsVisible.value;
 };
 
+const newComment = ref<string>(""); // 댓글 입력 상태
 
 onMounted(() => {
-
   console.log(`상세화면입니다 >>> ${props.inquiryId}`);
   loadInquiry();
   loadComments();
-
 });
 
 // 상세 데이터 로드
@@ -67,6 +64,26 @@ const formatDate = (dateString: string) => {
   const date = new Date(dateString);
   return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 };
+
+const addComment = () => {
+  if (newComment.value === "") {
+    alert("댓글을 입력하세요.");
+    return;
+  }
+
+  apiClient.post(`/inquiry/${props.inquiryId}/comment`, {inquiryId: `${props.inquiryId}`, content: newComment.value })
+    .then(() => {
+      alert("댓글이 등록되었습니다.");
+      // 댓글 목록 새로고침
+      loadComments();
+      newComment.value = "";
+    })
+    .catch((error) => {
+      console.error(error);
+      alert("댓글 등록 중 오류가 발생했습니다.");
+    });
+};
+
 
 // 수정 요청 핸들러
 const editComment = (commentId: number, currentContent: string) => {
@@ -104,7 +121,7 @@ const deleteComment = (commentId: number) => {
 
 <template>
   <el-row class="my-3">
-    <h1>상세</h1>
+    <h1>문의 상세</h1>
   </el-row>
   <div>
     <el-row>
@@ -120,6 +137,14 @@ const deleteComment = (commentId: number) => {
 
     <!-- 댓글 섹션 -->
     <div>
+      <el-row>
+        <el-input
+          v-model="newComment"
+          placeholder="댓글을 입력하세요"
+          class="comment-input"
+        />
+        <el-button type="primary" @click="addComment">등록</el-button>
+      </el-row>
       <el-row>
         <el-col>
           <div class="comment-toggle" @click="toggleComments">
@@ -139,6 +164,9 @@ const deleteComment = (commentId: number) => {
             <el-button type="default" @click="editComment(cmmt.id, cmmt.content)">수정</el-button>
             <el-button type="danger" @click="deleteComment(cmmt.id)">삭제</el-button>
           </div>
+        </el-col>
+        <el-col v-if="comments.length === 0">
+          <p>등록된 댓글이 없습니다.</p>
         </el-col>
       </el-row>
     </div>
@@ -214,5 +242,11 @@ const deleteComment = (commentId: number) => {
   display: flex;
   gap: 10px;
   margin-top: 5px;
+}
+
+.comment-input {
+  width: 25%;
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 </style>

@@ -1,10 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+
+const HomeView = import('@/views/HomeView.vue');
 const PostListView = import('@/views/PostListView.vue');
 const PostCreateView = import('@/views/PostCreateView.vue');
 const PostEditView = import('@/views/PostEditView.vue');
 const PostDetailView = import('@/views/PostDetailView.vue');
 
+const InquiryCreateView = import('@/views/InquiryCreateView.vue');
 const InquiryListView = import('@/views/InquiryListView.vue');
 const InquiryDetailView = import('@/views/InquiryDetailView.vue');
 const InquiryEditView = import('@/views/InquiryEditView.vue');
@@ -31,7 +33,7 @@ const router = createRouter({
     },
     {
       path : '/post/:postId',
-      name: 'postDetail',
+      name: 'detail',
       component: () => PostDetailView,
       props: true
     },
@@ -45,6 +47,11 @@ const router = createRouter({
       path: '/inquiry',
       name: 'inquiry',
       component: () => InquiryListView
+    },
+    {
+      path: '/inquiry/new',
+      name: 'inquiryCreate',
+      component: () => InquiryCreateView
     },
     {
       path: '/inquiry/:inquiryId',
