@@ -76,13 +76,13 @@
     <logger name="jdbc.connection" level="WARN" />
 
     <!-- Spring Profile 에 따라 로그 출력 정의 -->
-    <springProfile name="prod">
+    <springProfile name="!prod">
         <root level="INFO">
             <appender-ref ref="CONSOLE" />
             <appender-ref ref="ERROR" />
         </root>
     </springProfile>
-    <springProfile name="!prod">
+    <springProfile name="prod">
         <property name="LOG_PATH" value="/var/log" />
         <!--        <logger name="jdbc.resultsettable" level="OFF" />-->
         <root level="INFO">

@@ -1,4 +1,4 @@
-= 훈묵 블로그 API
+= 회원 API
 :doctype: book
 :icons: font
 :source-highlighter: highlightjs
@@ -6,20 +6,21 @@
 :toclevels: 1
 :sectlinks:
 
-
-
 === 회원목록 조회 API
+
+include::{snippets}/member-list/curl-request.adoc[]
+
 include::{snippets}/member-list/http-request.adoc[]
 
 include::{snippets}/member-list/http-response.adoc[]
 
 include::{snippets}/member-list/response-fields.adoc[]
 
-=== curl 요청
-include::{snippets}/member-list/curl-request.adoc[]
 
+=== 회원상세 조회 API
 
-=== 회원상세 파라미터
+include::{snippets}/member-detail/curl-request.adoc[]
+
 include::{snippets}/member-detail/http-request.adoc[]
 
 include::{snippets}/member-detail/path-parameters.adoc[]

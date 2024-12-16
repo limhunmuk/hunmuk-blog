@@ -8,8 +8,10 @@ import java.time.LocalDateTime;
 public class MemberView {
 
     private Long id;
+    private String loginId;
     private String name;
     private Integer age;
 
     private LocalDateTime regDt;
+    private String regId;
 }

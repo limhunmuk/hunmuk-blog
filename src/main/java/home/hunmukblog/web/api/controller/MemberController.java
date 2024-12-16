@@ -2,6 +2,7 @@ package home.hunmukblog.web.api.controller;
 
 import home.hunmukblog.domain.member.dto.MemberCreate;
 import home.hunmukblog.domain.member.dto.MemberSearch;
+import home.hunmukblog.domain.member.dto.MemberView;
 import home.hunmukblog.domain.member.entity.Member;
 import home.hunmukblog.web.api.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -35,15 +36,18 @@ public class MemberController {
 
 
     @GetMapping("/api/member")
-    public ResponseEntity<List<Member>> member(MemberSearch search) {
+    public ResponseEntity<List<MemberView>> member(MemberSearch search) {
 
-        List<Member> members = memberService.searchMemberList(search);
+        List<MemberView> members = memberService.searchMemberList(search);
         return ResponseEntity.ok(members);
     }
 
     @GetMapping("/api/member/{id}")
-    public Member memberDetail(@PathVariable Long id) {
-        return memberService.searchMemberDetail(id);
+    public MemberView memberDetail(@PathVariable Long id) {
+
+        MemberSearch search = new MemberSearch();
+        search.setId(id);
+        return memberService.searchMemberDetail(search);
     }
 
     @PostMapping("/api/signup")

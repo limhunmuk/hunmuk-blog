@@ -1,0 +1,30 @@
+= 게시글 API
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 1
+:sectlinks:
+
+=== 게시글 리스트
+
+include::{snippets}/post-list/curl-request.adoc[]
+
+include::{snippets}/post-list/http-request.adoc[]
+
+include::{snippets}/post-list/http-response.adoc[]
+
+include::{snippets}/post-list/response-fields.adoc[]
+
+=== 게시글 상세
+
+include::{snippets}/post-detail/curl-request.adoc[]
+
+include::{snippets}/post-detail/http-request.adoc[]
+
+include::{snippets}/post-detail/http-response.adoc[]
+
+include::{snippets}/post-detail/response-fields.adoc[]
+
+
+

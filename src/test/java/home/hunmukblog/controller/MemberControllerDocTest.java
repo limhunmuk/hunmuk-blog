@@ -22,6 +22,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
@@ -38,58 +40,62 @@ public class MemberControllerDocTest {
     @Autowired
     private MockMvc mockMvc;
 
-   /* @BeforeEach
+    @BeforeEach
     void setUp(WebApplicationContext webApplicationContext, RestDocumentationContextProvider restDocumentation) {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
-                .apply(documentationConfiguration(restDocumentation))
+                .apply(documentationConfiguration(restDocumentation)
+                        .operationPreprocessors()
+                        .withRequestDefaults(prettyPrint())
+                )
                 .build();
-    }*/
+    }
 
-   // @Test
+    @Test
     @DisplayName("리스트")
     public void test() throws Exception {
 
         // expecte
-        this.mockMvc.perform(get("/member")
+        this.mockMvc.perform(get("/api/member")
                         .accept("application/json")
                 )
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("member-list",
+                        preprocessResponse(prettyPrint()), // 테스트에 프리티 프린트 추가
                         responseFields(
-                                fieldWithPath("[].id").description("아이디"),
+                                fieldWithPath("[].id").description("일련번호"),
+                                fieldWithPath("[].loginId").optional().description("아이디"),
                                 fieldWithPath("[].name").description("이름"),
                                 fieldWithPath("[].age").description("나이"),
                                 fieldWithPath("[].regDt").description("등록일"),
-                                fieldWithPath("[].regId").description("등록자"),
-                                fieldWithPath("[].modDt").description("수정일"),
-                                fieldWithPath("[].modId").description("수정자")
+                                fieldWithPath("[].regId").description("등록자")
                         )
-                ));
+                ))
+                ;
     }
 
-    //@Test
+    @Test
     @DisplayName("상세")
     public void test2() throws Exception {
 
         // expecte
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/member/{id}", 1)
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/api/member/{id}", 1)
                         .accept("application/json")
                 )
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("member-detail",
+                        preprocessResponse(prettyPrint()), // 테스트에 프리티 프린트 추가
                         pathParameters(
                                 RequestDocumentation.parameterWithName("id").description("아이디")
                         ),
                         responseFields(
-                                fieldWithPath("id").description("아이디"),
+                                fieldWithPath("id").description("일련번호"),
+                                fieldWithPath("loginId").optional().description("아이디"),
                                 fieldWithPath("name").description("이름"),
                                 fieldWithPath("age").description("나이"),
                                 fieldWithPath("regDt").description("등록일"),
-                                fieldWithPath("regId").description("등록자"),
-                                fieldWithPath("modDt").description("수정일"),
-                                fieldWithPath("modId").description("수정자")
+                                fieldWithPath("regId").description("등록자")
                         )
                 ));
     }

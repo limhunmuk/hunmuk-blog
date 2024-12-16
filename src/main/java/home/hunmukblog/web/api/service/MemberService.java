@@ -3,9 +3,11 @@ package home.hunmukblog.web.api.service;
 import home.hunmukblog.domain.member.MemberRepository;
 import home.hunmukblog.domain.member.dto.MemberCreate;
 import home.hunmukblog.domain.member.dto.MemberSearch;
+import home.hunmukblog.domain.member.dto.MemberView;
 import home.hunmukblog.domain.member.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,14 +18,15 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    public List<Member> searchMemberList(MemberSearch memberSearch) {
-        return memberRepository.searchMemberList(memberSearch);
+    public List<MemberView> searchMemberList(MemberSearch search) {
+        return memberRepository.searchMemberList(search);
     }
 
-    public Member searchMemberDetail(Long id) {
-        return memberRepository.findById(id).orElse(null);
+    public MemberView searchMemberDetail(MemberSearch search) {
+        return memberRepository.searchMemberDetail(search);
     }
 
+    @Transactional
     public Member saveMember(MemberCreate request) {
 
         memberRepository.findByLoginId(request.getLoginId())
