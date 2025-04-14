@@ -21,7 +21,8 @@ const create = () => {
 
     alert("등록되었습니다.");
 
-    route.push({name: 'detail', params: {postId: response.data.id}});
+    //route.push({name: 'detail', params: {postId: response.data.id}});
+    route.push("/post");
   }).catch((error) => {
     console.log(error);
   });

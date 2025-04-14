@@ -1,5 +1,6 @@
 package home.hunmukblog.domain.post.entity;
 
+import home.hunmukblog.domain.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -32,14 +33,34 @@ public class Post {
     @Column(name = "reg_dt")
     private LocalDateTime regDt;
 
-    @Column(name = "reg_id", length = 45)
-    private String regId;
+    @ManyToOne
+    @JoinColumn(name = "reg_id")
+    private Member regUser;
 
     @Column(name = "mod_dt")
     private LocalDateTime modDt;
 
-    @Column(name = "mod_id", length = 45)
-    private String modId;
+    @Builder
+    public Post(String title, String content, Member user) {
+        this.title = title;
+        this.content = content;
+        this.regUser = user;
+    }
+
+    public PostEditor.PostEditorBuilder toEditor() {
+        return PostEditor.builder()
+                .title(title)
+                .content(content);
+    }
+
+    public void edit(PostEditor postEditor) {
+        title = postEditor.getTitle();
+        content = postEditor.getContent();
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "mod_id")
+    private Member modUser;
 
 
 }

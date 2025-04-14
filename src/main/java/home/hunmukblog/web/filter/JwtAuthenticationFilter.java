@@ -1,6 +1,7 @@
 package home.hunmukblog.web.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import home.hunmukblog.domain.member.MemberRepository;
 import home.hunmukblog.domain.member.dto.LoginDto;
 import home.hunmukblog.web.config.jwt.JwtTokenUtil;
 import jakarta.servlet.FilterChain;
@@ -20,18 +21,22 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
 
     private final AuthenticationManager authenticationManager;
     private final JwtTokenUtil jwtTokenUtil;
+    private final MemberRepository memberRepository;
 
-    //private final ObjectMapper objectMapper;
+
+    private final ObjectMapper objectMapper;
 
 /*    public JwtAuthenticationFilter(String loginUrl, ObjectMapper objectMapper) {
         super(loginUrl);
         this.objectMapper = objectMapper;
     }*/
 
-    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, String defaultFilterProcessesUrl) {
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, MemberRepository memberRepository,  String defaultFilterProcessesUrl) {
         super(defaultFilterProcessesUrl);
         this.authenticationManager = authenticationManager;
+        this.memberRepository = memberRepository;
         this.jwtTokenUtil = jwtTokenUtil;
+        this.objectMapper = new ObjectMapper();
     }
 
  /*   @Override

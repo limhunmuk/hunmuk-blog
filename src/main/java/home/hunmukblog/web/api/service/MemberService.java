@@ -40,7 +40,7 @@ public class MemberService {
                 .name(request.getName())
                 .age(Integer.valueOf(request.getAge()))
                 .regId("auto")
-                .regDt(LocalDateTime.now())
+                //.regDt(LocalDateTime.now())
                 .build();
 
         return memberRepository.save(member);

@@ -1,0 +1,38 @@
+= 문의사항 API
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 1
+:sectlinks:
+
+=== 리스트
+
+include::{snippets}/inquiry-list/curl-request.adoc[]
+
+include::{snippets}/inquiry-list/http-request.adoc[]
+
+include::{snippets}/inquiry-list/http-response.adoc[]
+
+include::{snippets}/inquiry-list/response-fields.adoc[]
+
+===  상세
+
+include::{snippets}/inquiry-detail/curl-request.adoc[]
+
+include::{snippets}/inquiry-detail/http-request.adoc[]
+
+include::{snippets}/inquiry-detail/http-response.adoc[]
+
+include::{snippets}/inquiry-detail/response-fields.adoc[]
+
+
+=== 댓글 리스트
+
+include::{snippets}/inquiry-comment-list/curl-request.adoc[]
+
+include::{snippets}/inquiry-comment-list/http-request.adoc[]
+
+include::{snippets}/inquiry-comment-list/http-response.adoc[]
+
+include::{snippets}/inquiry-comment-list/response-fields.adoc[]

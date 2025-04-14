@@ -1,10 +1,13 @@
 package home.hunmukblog.domain.post;
 
+import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import home.hunmukblog.domain.post.dto.PostSearch;
+import home.hunmukblog.domain.post.dto.PostView;
 import home.hunmukblog.domain.post.entity.Post;
+import home.hunmukblog.web.response.PostResponse;
 import jakarta.persistence.EntityManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,10 +30,25 @@ public class PostRepositoryImpl implements PostRepositoryCustom {
 
 
     @Override
-    public Page<Post> searchPostList(PostSearch postSearch, Pageable pageable) {
-        List<Post> content = queryFactory
-                .selectFrom(post)
+    public Page<PostResponse> searchPostList(PostSearch postSearch, Pageable pageable) {
+        List<PostResponse> content = queryFactory
+                .select(Projections.fields(PostResponse.class,
+                        post.id,
+                        post.content,
+                        post.title,
+                        post.regUser.loginId.as("regId"),
+                        post.regUser.name.as("regName"),
+                        post.regDt,
+                        post.modUser.loginId.as("modId"),
+                        post.modUser.name.as("modName"),
+                        post.modDt
+                    )
+                )
+                .from(post)
+                .leftJoin(post.regUser)
+                .leftJoin(post.modUser)
                 .where(
+                        post.regUser.id.isNotNull(),
                         containTitle(postSearch.getTitle()),
                         containContent(postSearch.getContent())
                 )

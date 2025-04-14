@@ -26,11 +26,15 @@ const loginProc = () => {
     password: login.value.password
   }).then((response) => {
     console.log(response);
-    alert("로그인 성공");
 
-    console.log(response.data);
+
+    console.log("==================================");
+
     localStorage.setItem("accessToken", response.data.accessToken);
     localStorage.setItem("refreshToken", response.data.refreshToken);
+    localStorage.setItem("member", response.data.member);
+    console.log(response.data);
+    console.log("==================================");
 
     route.push("/post");
 

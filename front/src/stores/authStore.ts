@@ -56,7 +56,8 @@ apiClient.interceptors.response.use(
           localStorage.removeItem("refreshToken");
 
           alert("세션이 만료되었습니다. 다시 로그인해주세요.[로그인 페이지 이동]");
-          window.location.href = "/login"; // 로그인 페이지로 리다이렉트
+          //window.location.href = "/login"; // 로그인 페이지로 리다이렉트
+          router.push({ name: "login" });
         }
       }
     }else{

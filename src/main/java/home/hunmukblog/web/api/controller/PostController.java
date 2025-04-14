@@ -1,10 +1,13 @@
 package home.hunmukblog.web.api.controller;
 
+import home.hunmukblog.domain.member.entity.Member;
 import home.hunmukblog.domain.post.dto.PostCreate;
 import home.hunmukblog.domain.post.dto.PostSearch;
 import home.hunmukblog.domain.post.dto.PostUpdate;
+import home.hunmukblog.domain.post.dto.PostView;
 import home.hunmukblog.domain.post.entity.Post;
 import home.hunmukblog.web.api.service.PostService;
+import home.hunmukblog.web.response.PostResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,6 +15,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,7 +35,9 @@ public class PostController {
      * @return
      */
     @GetMapping("/api/post")
-    public Page<Post> posts(PostSearch condition) {
+    public Page<PostResponse> posts(PostSearch condition, Authentication authentication) {
+
+        System.out.println("authentication.getPrincipal().toString() = " + authentication.getPrincipal().toString());
 
         int setPage = 1;
         int setSize = 10;
@@ -66,12 +73,13 @@ public class PostController {
      * @return
      */
     @PostMapping("/api/post")
-    public ResponseEntity<?> PostCreate(@RequestBody PostCreate request) {
+    public ResponseEntity<?> PostCreate(@RequestBody PostCreate request, @AuthenticationPrincipal Member member, Authentication authentication) {
 
+        System.out.println("authentication.getPrincipal().toString() = " + authentication.getPrincipal().toString());
         System.out.println(" ============================================== " );
         System.out.println("request = " + request);
         System.out.println(" ============================================== " );
-        Post post = postService.savePost(request);
+        Post post = postService.savePost(request, member);
         return ResponseEntity.ok().body(post);
     }
 

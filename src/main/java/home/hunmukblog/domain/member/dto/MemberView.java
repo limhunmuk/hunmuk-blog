@@ -13,5 +13,4 @@ public class MemberView {
     private Integer age;
 
     private LocalDateTime regDt;
-    private String regId;
 }

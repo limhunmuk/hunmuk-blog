@@ -32,7 +32,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
                         member.loginId,
                         member.name,
                         member.age,
-                        member.regDt,
+                        //member.regDt,
                         member.regId
                 ))
                 .from(member)
@@ -50,7 +50,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
                         member.loginId,
                         member.name,
                         member.age,
-                        member.regDt,
+                        //member.regDt,
                         member.regId
                 ))
                 .from(member)

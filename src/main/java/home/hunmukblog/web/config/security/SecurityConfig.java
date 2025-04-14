@@ -18,6 +18,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -53,9 +54,12 @@ public class SecurityConfig {
         JwtAuthorizationFilter jwtAuthorizationFilter = new JwtAuthorizationFilter(jwtTokenUtil);
 
         // 로그인 필터는 JwtAuthenticationFilter에서 처리합니다.
-        JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager(), jwtTokenUtil, "/api/login");
+        JwtAuthenticationFilter jwtAuthenticationFilter =
+                new JwtAuthenticationFilter(authenticationManager(), jwtTokenUtil, userRepository,"/api/login");
+//        jwtAuthenticationFilter.setAuthenticationSuccessHandler(new LoginSuccessHandler(userRepository));
 
-        return http.authorizeHttpRequests(
+        return http
+                .authorizeHttpRequests(
 
                     auth ->
                             //auth.requestMatchers("/api/login").permitAll()
@@ -70,9 +74,23 @@ public class SecurityConfig {
                         .alwaysRemember(false)
                         .tokenValiditySeconds(60*5)
                 )
+                .sessionManagement(session -> {
+                    session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED); // 필요한 경우에만 세션 생성
+                    session.maximumSessions(1) // 사용자당 세션 하나로 제한
+                    .maxSessionsPreventsLogin(true); // 세션 초과 시 로그인 차단
+                })
                 .csrf(AbstractHttpConfigurer::disable)
                 .build();
     }
+
+    @Bean
+    public AuthenticationManager authenticationManager() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder());
+        return new ProviderManager(provider);
+    }
+
 
     // 사용안하고 있음
     //@Bean
@@ -96,14 +114,6 @@ public class SecurityConfig {
         return filter;
     }
 **/
-
-    @Bean
-    public AuthenticationManager authenticationManager() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService);
-        provider.setPasswordEncoder(passwordEncoder());
-        return new ProviderManager(provider);
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

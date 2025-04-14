@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.18">
-<title>게시글 API</title>
+<title>문의사항 API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -440,29 +440,32 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>게시글 API</h1>
+<h1>문의사항 API</h1>
 <div class="details">
 <span id="revnumber">version 0.0.1-SNAPSHOT</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel2">
-<li><a href="#_게시글_리스트">게시글 리스트</a></li>
-<li><a href="#_게시글_상세">게시글 상세</a></li>
+<li><a href="#_리스트">리스트</a></li>
+<li><a href="#_상세">상세</a></li>
+<li><a href="#_댓글_리스트">댓글 리스트</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect2">
-<h3 id="_게시글_리스트"><a class="link" href="#_게시글_리스트">게시글 리스트</a></h3>
+<h3 id="_리스트"><a class="link" href="#_리스트">리스트</a></h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ curl 'http://localhost:8080/api/post?page=0&amp;size=10' -i -X GET</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ curl 'http://localhost:8080/api/inquiry' -i -X GET \
+    -H 'Accept: application/json'</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/post?page=0&amp;size=10 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/inquiry HTTP/1.1
+Accept: application/json
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -470,126 +473,184 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 2489
+Content-Length: 4284
 
-{
-  "content" : [ {
-    "id" : 9,
-    "title" : "제목입니다.",
-    "content" : "내용입니다.",
-    "viewCnt" : null,
-    "regDt" : "2024-11-12T17:29:02.037377",
-    "regId" : "auto",
-    "modDt" : null,
-    "modId" : null
-  }, {
-    "id" : 12,
-    "title" : "new",
-    "content" : "new",
-    "viewCnt" : null,
-    "regDt" : "2024-11-18T12:04:39.516268",
-    "regId" : "auto",
-    "modDt" : null,
-    "modId" : null
-  }, {
-    "id" : 13,
-    "title" : "title",
-    "content" : "content",
-    "viewCnt" : null,
-    "regDt" : "2024-11-18T12:04:39.516268",
-    "regId" : "test1",
-    "modDt" : null,
-    "modId" : null
-  }, {
-    "id" : 14,
-    "title" : "title",
-    "content" : "content",
-    "viewCnt" : null,
-    "regDt" : "2024-11-18T12:04:39.516268",
-    "regId" : "test1",
-    "modDt" : null,
-    "modId" : null
-  }, {
-    "id" : 15,
-    "title" : "title",
-    "content" : "content",
-    "viewCnt" : null,
-    "regDt" : "2024-11-18T12:04:39.516268",
-    "regId" : "test1",
-    "modDt" : null,
-    "modId" : null
-  }, {
-    "id" : 16,
-    "title" : "title",
-    "content" : "content",
-    "viewCnt" : null,
-    "regDt" : "2024-11-18T12:04:39.516268",
-    "regId" : "test1",
-    "modDt" : null,
-    "modId" : null
-  }, {
-    "id" : 17,
-    "title" : "title",
-    "content" : "content",
-    "viewCnt" : null,
-    "regDt" : "2024-11-18T12:04:39.516268",
-    "regId" : "test1",
-    "modDt" : null,
-    "modId" : null
-  }, {
-    "id" : 18,
-    "title" : "title",
-    "content" : "content",
-    "viewCnt" : null,
-    "regDt" : "2024-11-18T12:04:39.516268",
-    "regId" : "test1",
-    "modDt" : null,
-    "modId" : null
-  }, {
-    "id" : 19,
-    "title" : "title",
-    "content" : "content",
-    "viewCnt" : null,
-    "regDt" : "2024-11-18T12:04:39.516268",
-    "regId" : "test1",
-    "modDt" : null,
-    "modId" : null
-  }, {
-    "id" : 20,
-    "title" : "title",
-    "content" : "content",
-    "viewCnt" : null,
-    "regDt" : "2024-11-18T12:04:39.516268",
-    "regId" : "test1",
-    "modDt" : null,
-    "modId" : null
-  } ],
-  "pageable" : {
-    "pageNumber" : 0,
-    "pageSize" : 10,
-    "sort" : {
-      "empty" : false,
-      "sorted" : true,
-      "unsorted" : false
-    },
-    "offset" : 0,
-    "paged" : true,
-    "unpaged" : false
-  },
-  "last" : false,
-  "totalPages" : 3,
-  "totalElements" : 24,
-  "first" : true,
-  "size" : 10,
-  "number" : 0,
-  "sort" : {
-    "empty" : false,
-    "sorted" : true,
-    "unsorted" : false
-  },
-  "numberOfElements" : 10,
-  "empty" : false
-}</code></pre>
+[ {
+  "id" : 37,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-13T16:59:39.73467"
+}, {
+  "id" : 36,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-13T16:59:06.946243"
+}, {
+  "id" : 35,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-13T16:56:29.302495"
+}, {
+  "id" : 34,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-13T16:43:59.003898"
+}, {
+  "id" : 33,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-13T16:05:28.871839"
+}, {
+  "id" : 32,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-13T16:05:00.13448"
+}, {
+  "id" : 31,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-13T16:04:14.554013"
+}, {
+  "id" : 30,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-13T16:03:48.670911"
+}, {
+  "id" : 29,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-13T16:00:08.440313"
+}, {
+  "id" : 28,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-13T15:59:32.545982"
+}, {
+  "id" : 27,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-13T15:07:11.020482"
+}, {
+  "id" : 26,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-13T15:04:30.976701"
+}, {
+  "id" : 25,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-13T15:04:16.55725"
+}, {
+  "id" : 24,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-13T14:55:42.525679"
+}, {
+  "id" : 23,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-13T14:45:43.797208"
+}, {
+  "id" : 22,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-13T14:44:27.484913"
+}, {
+  "id" : 21,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-13T14:21:47.475823"
+}, {
+  "id" : 20,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-13T14:07:09.113158"
+}, {
+  "id" : 19,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-13T13:44:44.466896"
+}, {
+  "id" : 18,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-13T13:36:39.358642"
+}, {
+  "id" : 17,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-11T11:10:14.950304"
+}, {
+  "id" : 16,
+  "title" : "어디까지 했지",
+  "content" : "???",
+  "regDt" : "2024-12-11T10:23:45.089077"
+}, {
+  "id" : 15,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-10T11:47:06.980933"
+}, {
+  "id" : 14,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-10T11:19:49.947601"
+}, {
+  "id" : 13,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-10T11:19:24.391624"
+}, {
+  "id" : 12,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-09T17:25:23.695033"
+}, {
+  "id" : 11,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-09T17:23:18.038607"
+}, {
+  "id" : 10,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-09T15:41:21.540342"
+}, {
+  "id" : 9,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-09T11:37:14.222016"
+}, {
+  "id" : 8,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-09T11:37:05.812715"
+}, {
+  "id" : 7,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : "2024-12-09T11:35:40.554414"
+}, {
+  "id" : 6,
+  "title" : "문의 제목 새글",
+  "content" : "문의 내용",
+  "regDt" : null
+}, {
+  "id" : 5,
+  "title" : "문의 제목",
+  "content" : "문의 내용",
+  "regDt" : null
+}, {
+  "id" : 2,
+  "title" : "문의1",
+  "content" : "본문1",
+  "regDt" : "2024-11-20T16:03:01"
+}, {
+  "id" : 1,
+  "title" : "문의4",
+  "content" : "본문4",
+  "regDt" : "2024-11-20T16:03:01"
+} ]</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -607,168 +668,40 @@ Content-Length: 2489
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pageable</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">페이지 정보</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pageable.pageNumber</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">현재 페이지 번호 (0부터 시작)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">문의 ID</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pageable.pageSize</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">페이지 크기</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pageable.offset</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">현재 페이지의 시작 오프셋</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pageable.paged</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">페이징 여부</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pageable.unpaged</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">비페이징 여부</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pageable.sort</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">정렬 정보</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pageable.sort.empty</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">정렬 값이 비었는지 여부</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pageable.sort.sorted</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">정렬이 되었는지 여부</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pageable.sort.unsorted</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">정렬되지 않았는지 여부</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>last</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">마지막 페이지 여부</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>totalPages</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">총 페이지 수</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>totalElements</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">총 요소 수</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>first</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">첫 번째 페이지 여부</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>size</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">페이지 크기</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">현재 페이지 번호</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sort</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">정렬 정보</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sort.empty</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">정렬 값이 비었는지 여부</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sort.sorted</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">정렬이 되었는지 여부</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sort.unsorted</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">정렬되지 않았는지 여부</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>numberOfElements</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">현재 페이지 요소 수</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>empty</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">응답이 비었는지 여부</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content[].id</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">게시물 ID</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content[].title</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].title</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">게시물 제목</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">문의 제목</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content[].content</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].content</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">게시물 내용</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">문의 내용</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content[].viewCnt</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">조회수</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content[].regDt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].regDt</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">등록일</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content[].regId</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">등록한 사용자 ID</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content[].modDt</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">수정일</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content[].modId</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">수정한 사용자 ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">문의 등록일</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect2">
-<h3 id="_게시글_상세"><a class="link" href="#_게시글_상세">게시글 상세</a></h3>
+<h3 id="_상세"><a class="link" href="#_상세">상세</a></h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ curl 'http://localhost:8080/api/post/9' -i -X GET</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ curl 'http://localhost:8080/api/inquiry/1' -i -X GET \
+    -H 'Accept: application/json'</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/post/9 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/inquiry/1 HTTP/1.1
+Accept: application/json
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -776,15 +709,15 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 198
+Content-Length: 171
 
 {
-  "id" : 9,
-  "title" : "제목입니다.",
-  "content" : "내용입니다.",
-  "viewCnt" : null,
-  "regDt" : "2024-11-12T17:29:02.037377",
-  "regId" : "auto",
+  "id" : 1,
+  "title" : "문의4",
+  "content" : "본문4",
+  "viewCnt" : 0,
+  "regDt" : "2024-11-20T16:03:01",
+  "regId" : "test1",
   "modDt" : null,
   "modId" : null
 }</code></pre>
@@ -807,17 +740,17 @@ Content-Length: 198
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">일련번호</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">문의 ID</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>title</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">제목</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">문의 제목</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>content</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">내용</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">문의 내용</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>viewCnt</code></p></td>
@@ -825,24 +758,105 @@ Content-Length: 198
 <td class="tableblock halign-left valign-top"><p class="tableblock">조회수</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>regDt</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">등록일</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>regId</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">등록아이디</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">문의 등록 ID</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>modDt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>regDt</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">수정일</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">문의 등록일</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>modId</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">수정아이디</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">문의 수정 ID</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>modDt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">문의 수정일</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_댓글_리스트"><a class="link" href="#_댓글_리스트">댓글 리스트</a></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ curl 'http://localhost:8080/api/inquiry/1/comment' -i -X GET \
+    -H 'Accept: application/json'</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/inquiry/1/comment HTTP/1.1
+Accept: application/json
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 438
+
+[ {
+  "inquiryId" : 1,
+  "content" : "2빠?",
+  "regId" : "admin",
+  "regDt" : "2024-12-05T16:53:43"
+}, {
+  "inquiryId" : 1,
+  "content" : "1빠?",
+  "regId" : "admin",
+  "regDt" : "2024-12-05T16:53:41"
+}, {
+  "inquiryId" : 1,
+  "content" : "반갑습니다",
+  "regId" : "admin",
+  "regDt" : "2024-12-05T16:53:40"
+}, {
+  "inquiryId" : 1,
+  "content" : "안녕하세요\n",
+  "regId" : "auto",
+  "regDt" : "2024-12-02T16:56:49.312188"
+} ]</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].inquiryId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">댓글 ID</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].content</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">댓글 내용</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].regDt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">댓글 등록일</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].regId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">댓글 등록 ID</p></td>
 </tr>
 </tbody>
 </table>
@@ -851,7 +865,7 @@ Content-Length: 198
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2024-12-13 16:04:56 +0900
+Last updated 2024-12-16 16:13:27 +0900
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

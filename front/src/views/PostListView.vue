@@ -8,9 +8,16 @@ import apiClient from "@/stores/authStore.ts";
 interface Post {
   id: number;
   title: string;
+  content: string;
   regId: string;
+  regName: string;
   regDt: string;
+  modId: string;
+  modName: string;
+  modDt: string;
+
 }
+
 
 const posts = ref<Post[]>([]);
 

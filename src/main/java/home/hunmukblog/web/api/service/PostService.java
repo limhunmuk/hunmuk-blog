@@ -1,15 +1,20 @@
 package home.hunmukblog.web.api.service;
 
+import home.hunmukblog.domain.member.entity.Member;
 import home.hunmukblog.domain.post.PostRepository;
 import home.hunmukblog.domain.post.dto.PostCreate;
 import home.hunmukblog.domain.post.dto.PostSearch;
 import home.hunmukblog.domain.post.dto.PostUpdate;
+import home.hunmukblog.domain.post.dto.PostView;
 import home.hunmukblog.domain.post.entity.Post;
+import home.hunmukblog.domain.post.entity.PostEditor;
+import home.hunmukblog.web.response.PostResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,7 +30,7 @@ public class PostService {
      * @param postSearch
      * @return
      */
-    public Page<Post> searchPostList(PostSearch postSearch, Pageable pageable) {
+    public Page<PostResponse> searchPostList(PostSearch postSearch, Pageable pageable) {
         return postRepository.searchPostList(postSearch, pageable);
     }
 
@@ -43,16 +48,17 @@ public class PostService {
      * @param request
      * @return
      */
-    public Post savePost(PostCreate request) {
+    @Transactional
+    public Post savePost(PostCreate request, Member member) {
 
         Post post = Post.builder()
                 .title(request.getTitle())
                 .content(request.getContent())
-                .regId("auto")
-                .regDt(LocalDateTime.now())
+                .user(member)
                 .build();
 
-        return postRepository.save(post);
+        //return postRepository.save(post);
+        return post;
     }
 
     /**
@@ -69,10 +75,14 @@ public class PostService {
                 throw new IllegalArgumentException("해당 게시글이 존재하지 않습니다.");
             }
 
-            post.setTitle(request.getTitle());
-            post.setContent(request.getContent());
+        PostEditor.PostEditorBuilder editor = post.toEditor();
 
-            return postRepository.save(post);
+        editor.title(request.getTitle());
+        editor.content(request.getContent());
+
+        post.edit(editor.build());
+       // return postRepository.save(post);
+        return post;
     }
 
     /**

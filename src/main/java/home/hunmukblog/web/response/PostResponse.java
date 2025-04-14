@@ -4,17 +4,27 @@ import home.hunmukblog.domain.post.entity.Post;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
 /**
  * 서비스 정책에 맞는 클래스
  */
 @Getter
 public class PostResponse {
 
-    private final Long id;
-    private final String title;
-    private final String content;
+    private Long id;
+    private String title;
+    private String content;
 
-    // 생성자 오버로딩
+    private String regId;
+    private String modId;
+    private String regName;
+    private String modName;
+
+    private LocalDateTime regDt;
+    private LocalDateTime modDt;
+
+    /**
     public PostResponse(Post post) {
         this.id = post.getId();
         this.title = post.getTitle();
@@ -27,4 +37,5 @@ public class PostResponse {
         this.title = title.substring(0, Math.min(title.length(), 10));
         this.content = content;
     }
+    */
 }
